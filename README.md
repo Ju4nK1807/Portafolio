@@ -21,3 +21,14 @@ Una sola página con todas las secciones, modo claro/oscuro y diseño responsive
 7. ⭐ Habilidades (sección adicional) + modo oscuro
 8. Contacto con formulario
 9. Pie de página
+
+## Cómo ejecutarlo
+
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # compilación de producción
+```
+
+Para que el formulario envíe correos, copia `.env.example` como `.env.local` y agrega tu ID de
+[Formspree](https://formspree.io). Sin esa variable, el formulario abre tu cliente de correo.
