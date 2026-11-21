@@ -110,3 +110,21 @@ section[id] {
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse at 30% 40%, black 20%, transparent 70%);
 }
+
+/* ---------- Animaciones ---------- */
+@theme {
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes float {
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
