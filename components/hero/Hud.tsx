@@ -31,7 +31,7 @@ function getBrowser() {
   return "Desconocido";
 }
 
-const COMMIT = (process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? "local-dev").slice(0, 7);
+const COMMIT = (process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? "dev").slice(0, 7);
 const location = quickFacts.find((fact) => fact.label === "Ubicación")?.value ?? "";
 
 /** Panel de metadatos estilo terminal con la "credencial" del autor. */
