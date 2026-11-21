@@ -42,15 +42,6 @@ export const experience: Experience[] = [
   // Laboral
   {
     kind: "laboral",
-    title: "Desarrollador · BiomedicTrack",
-    org: "Hospital E.S.E Juan Pablo II",
-    start: "2026-02",
-    end: null,
-    description:
-      "Sistema de gestión de equipos biomédicos: aplicación web en React y FastAPI y app móvil en Flutter que consume la misma API REST.",
-  },
-  {
-    kind: "laboral",
     title: "Desarrollador de proyectos propios",
     org: "Independiente",
     start: "2025-06",
