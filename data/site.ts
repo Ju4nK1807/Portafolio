@@ -20,6 +20,14 @@ export const site = {
   available: true,
 };
 
+/** Roles que se escriben en el hero, uno tras otro. */
+export const roles: string[] = [
+  "desarrollador de software",
+  "diseñador de interfaces",
+  "creador de apps móviles",
+  "estudiante de ingeniería",
+];
+
 export const socials: Social[] = [
   { label: "GitHub", href: site.github, icon: "github" },
   { label: "LinkedIn", href: site.linkedin, icon: "linkedin" },
