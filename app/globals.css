@@ -152,3 +152,24 @@ section[id] {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ---------- Efectos de terminal ---------- */
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    color-mix(in srgb, var(--bg) 35%, transparent) 3px,
+    transparent 4px
+  );
+}
+
+@theme {
+  --animate-blink: blink 1s steps(1) infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
