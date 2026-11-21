@@ -23,7 +23,7 @@ export const site = {
 export const roles: string[] = [
   "desarrollador full stack",
   "apps web y móviles",
-  "backends en la nube con AWS",
+  "apps de escritorio y wearables",
   "estudiante de ingeniería de software",
 ];
 
@@ -42,6 +42,6 @@ export const quickFacts: QuickFact[] = [
 
 export const aboutParagraphs: string[] = [
   "Estudio quinto semestre de Ingeniería de Software en la Universidad Cooperativa de Colombia, sede Pasto. Tengo proyectos de desarrollo web, aplicaciones móviles y despliegue en la nube con AWS.",
-  "Me interesan la arquitectura de software y los atributos de calidad: que un sistema no solo funcione, sino que aguante carga, se pueda mantener y esté bien documentado. He trabajado en equipo usando Git y GitHub, desde juegos 3D hasta sistemas para un hospital.",
+  "Me interesan la arquitectura de software y los atributos de calidad: que un sistema no solo funcione, sino que aguante carga, se pueda mantener y esté bien documentado. He trabajado en equipo usando Git y GitHub y disfruto llevar mis propios proyectos de principio a fin.",
   "Busco mi primera práctica en desarrollo de software para aportar, aprender y crecer dentro de un equipo.",
 ];
