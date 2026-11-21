@@ -14,7 +14,8 @@ export const site = {
   // TODO: reemplaza por la URL de tu perfil de LinkedIn.
   linkedin: "https://www.linkedin.com/",
   cv: "/cv.pdf",
-  photo: "/images/avatar.svg",
+  photo: "/images/perfil-cuadrada.jpg",
+  photoPortrait: "/images/perfil.jpg",
   // TODO: cambia por la URL que te asigne Vercel.
   url: "https://portafolio-ju4nk1807.vercel.app",
   available: true,
