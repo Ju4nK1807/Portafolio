@@ -52,7 +52,7 @@ void main() {
   vec2 uv = (gl_FragCoord.xy * 2.0 - uRes) / uRes.y;
   uv.x -= uOffset;
 
-  vec3 ro = vec3(0.0, 0.0, 4.4);
+  vec3 ro = vec3(0.0, -0.35, 5.6);
   vec3 rd = normalize(vec3(uv, -1.9));
 
   float t = 0.0;
