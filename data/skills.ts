@@ -1,21 +1,22 @@
 import type { SkillGroup } from "@/types";
 
+// Habilidades tomadas de la hoja de vida.
 export const skillGroups: SkillGroup[] = [
   {
     title: "Lenguajes",
-    items: ["TypeScript", "JavaScript", "Python", "Kotlin", "SQL", "HTML", "CSS"],
+    items: ["TypeScript", "JavaScript", "Python", "PHP", "SQL"],
   },
   {
     title: "Frameworks",
-    items: ["React", "Next.js", "React Native", "Expo", "NestJS", "Tailwind CSS", "Three.js"],
+    items: ["React", "Next.js", "NestJS", "FastAPI", "Flutter", "Three.js"],
   },
   {
-    title: "Herramientas y nube",
-    items: ["Git", "GitHub Actions", "Docker", "AWS", "Vercel", "Electron", "Vite"],
+    title: "Datos y nube",
+    items: ["PostgreSQL", "MySQL", "Redis", "AWS", "Docker", "Git y GitHub"],
   },
   {
-    title: "Forma de trabajo",
-    items: ["Diseño de interfaces", "Pruebas automáticas", "SCRUM", "Código limpio"],
+    title: "Habilidades blandas",
+    items: ["Trabajo en equipo", "Aprendizaje autónomo", "Comunicación", "Documentación", "Responsabilidad"],
   },
 ];
 
@@ -24,13 +25,13 @@ export const marqueeSkills: string[] = [
   "TypeScript",
   "React",
   "Next.js",
-  "Tailwind CSS",
-  "React Native",
-  "Three.js",
-  "Kotlin",
   "NestJS",
+  "FastAPI",
+  "Flutter",
+  "Three.js",
   "Python",
+  "PostgreSQL",
+  "Redis",
+  "AWS Lambda",
   "Docker",
-  "AWS",
-  "Electron",
 ];
