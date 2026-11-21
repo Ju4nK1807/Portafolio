@@ -1,30 +1,40 @@
 import type { Experience } from "@/types";
 
-// TODO: ajusta instituciones, cargos y fechas reales.
+// Datos tomados de la hoja de vida.
 export const experience: Experience[] = [
   // Académica
   {
     kind: "academica",
     title: "Ingeniería de Software",
-    org: "Universidad (por confirmar)",
+    org: "Universidad Cooperativa de Colombia – Sede Pasto",
     start: "2024-07",
     end: null,
     description:
-      "Actualmente en 5.º semestre. Énfasis en diseño de interfaces, arquitectura de software, bases de datos y computación en la nube.",
+      "En curso, quinto semestre. Proyectos de desarrollo web, aplicaciones móviles, arquitectura de software y despliegue en la nube con AWS.",
   },
   {
     kind: "academica",
-    title: "Proyecto final · Arquitectura Computacional",
-    org: "Universidad",
+    title: "Pruebas de carga a Memos",
+    org: "Arquitectura Computacional · Proyecto en pareja",
     start: "2026-08",
     end: "2026-11",
     description:
-      "Medición de rendimiento de una red social (Memos) desplegada en AWS con distintas estrategias de caché, usando pruebas de carga con k6.",
+      "Medición de rendimiento de una app de notas de código abierto bajo carga, comparando PC local, Docker con límites de recursos y una instancia EC2 de AWS.",
   },
   {
     kind: "academica",
-    title: "Bachiller académico",
-    org: "Colegio (por confirmar)",
+    title: "Vigía Rural",
+    org: "Formulación y Evaluación de Proyectos",
+    start: "2026-08",
+    end: "2026-11",
+    description:
+      "Formulación de un sistema de monitoreo en tiempo real de fallas eléctricas con sensores IoT para la vereda Tambillo, Linares (Nariño).",
+  },
+  {
+    kind: "academica",
+    title: "Bachiller Académico",
+    // TODO: escribe el nombre de tu colegio.
+    org: "Colegio",
     start: "2018-01",
     end: "2023-11",
     description: "Formación secundaria.",
@@ -32,21 +42,21 @@ export const experience: Experience[] = [
   // Laboral
   {
     kind: "laboral",
-    title: "Desarrollador freelance",
-    org: "Proyectos independientes",
-    start: "2025-01",
+    title: "Desarrollador · BiomedicTrack",
+    org: "Hospital E.S.E Juan Pablo II",
+    start: "2026-02",
     end: null,
     description:
-      "Desarrollo de aplicaciones web, móviles y de escritorio: desde el diseño de la interfaz hasta el empaquetado y la publicación.",
+      "Sistema de gestión de equipos biomédicos: aplicación web en React y FastAPI y app móvil en Flutter que consume la misma API REST.",
   },
   {
     kind: "laboral",
-    title: "Desarrollador · Proyecto integrador",
-    org: "Equipo universitario",
-    start: "2026-02",
-    end: "2026-06",
+    title: "Desarrollador de proyectos propios",
+    org: "Independiente",
+    start: "2025-06",
+    end: null,
     description:
-      "Construcción de un esqueleto de microservicios para mantenimiento de equipos biomédicos, trabajando con metodología ágil en equipo.",
+      "Diseño y desarrollo de aplicaciones propias de principio a fin: un aim trainer 3D, una app de escritorio que genera páginas web y un registro de hábitos para Wear OS.",
   },
 ];
 
