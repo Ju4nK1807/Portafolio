@@ -22,7 +22,7 @@ export default function Hero() {
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent" aria-hidden="true" />
 
-      <div className="container-page relative flex flex-1 flex-col justify-between gap-12 pt-28 pb-16">
+      <div className="container-page relative flex flex-1 flex-col justify-between gap-12 pt-24 pb-14">
         <div className="flex justify-end">
           <div className="hidden md:block">
             <Hud />
@@ -34,7 +34,7 @@ export default function Hero() {
             <span className="text-muted">invitado@portafolio:~$</span> whoami
           </p>
 
-          <h1 className="mt-4 font-mono text-5xl leading-[1.02] font-bold tracking-tighter sm:text-6xl lg:text-8xl">
+          <h1 className="mt-4 font-mono text-5xl leading-[1.02] font-bold tracking-tighter sm:text-6xl xl:text-8xl">
             <ScrambleText text={site.firstName} delay={1700} />
             <br />
             <ScrambleText text="Bastidas." delay={1900} className="text-accent" />
