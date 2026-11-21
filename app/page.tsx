@@ -1,11 +1,12 @@
 import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <main id="contenido">
-        {/* Las secciones se agregan aquí, en el orden del mapa. */}
+        <Hero />
       </main>
     </>
   );
