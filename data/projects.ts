@@ -24,7 +24,7 @@ export const projects: Project[] = [
     image: "/images/projects/habita.svg",
     tags: ["React Native", "Expo", "TypeScript", "IA"],
     year: "2026",
-    status: "En desarrollo",
+    status: "Terminado",
     repo: "https://github.com/Ju4nK1807/Habitar_juank",
   },
   {
