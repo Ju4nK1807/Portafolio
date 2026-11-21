@@ -4,26 +4,29 @@
 
 /* ---------- Paleta de colores ---------- */
 :root {
-  --bg: #f6f4ef;
+  --bg: #f2f5f1;
   --surface: #ffffff;
-  --surface-2: #efece4;
-  --fg: #15171c;
-  --muted: #5c6170;
-  --line: #e2ded4;
-  --accent: #d9481e;
-  --accent-2: #157a6e;
+  --surface-2: #e6ece5;
+  --fg: #0c120f;
+  --muted: #4f5d56;
+  --line: #d3dbd2;
+  --accent: #0b8a45;
+  --accent-fg: #ffffff;
+  --accent-2: #0e7c86;
   color-scheme: light;
 }
 
+/* Modo oscuro: verde fósforo sobre negro, estilo terminal */
 .dark {
-  --bg: #0d0f13;
-  --surface: #151820;
-  --surface-2: #1b1f29;
-  --fg: #edebe6;
-  --muted: #9ca2af;
-  --line: #262b35;
-  --accent: #ff7849;
-  --accent-2: #4fd1b5;
+  --bg: #060908;
+  --surface: #0c1110;
+  --surface-2: #111816;
+  --fg: #e2efe7;
+  --muted: #7d8f86;
+  --line: #1a2420;
+  --accent: #3dff8b;
+  --accent-fg: #03140a;
+  --accent-2: #2ee6d6;
   color-scheme: dark;
 }
 
@@ -35,6 +38,7 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
   --color-accent-2: var(--accent-2);
   --font-sans: var(--font-sans-family), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-family), ui-monospace, monospace;
@@ -59,7 +63,7 @@ section[id] {
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-fg);
 }
 
 /* ---------- Componentes reutilizables ---------- */
