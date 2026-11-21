@@ -75,7 +75,7 @@ export default function MobileMenu({ open, active, onClose }: MobileMenuProps) {
           href={site.cv}
           download
           tabIndex={open ? 0 : -1}
-          className="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 font-medium text-white"
+          className="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 font-medium text-accent-fg"
         >
           <DownloadIcon /> Descargar CV
         </a>

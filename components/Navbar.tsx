@@ -50,7 +50,7 @@ export default function Navbar() {
           <a
             href={site.cv}
             download
-            className="hidden items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 md:inline-flex"
+            className="hidden items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-fg transition-opacity hover:opacity-90 md:inline-flex"
           >
             <DownloadIcon /> CV
           </a>
