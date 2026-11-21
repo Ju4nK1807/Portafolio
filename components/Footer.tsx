@@ -2,8 +2,14 @@ import { navLinks } from "@/data/navigation";
 import { site, socials } from "@/data/site";
 import { ArrowUpIcon, SocialIconFor } from "./icons";
 
-export default function Footer() {
-  const year = new Date().getFullYear();
+/** Año para el ©. Se calcula al compilar y queda en caché. */
+async function getYear() {
+  "use cache";
+  return new Date().getFullYear();
+}
+
+export default async function Footer() {
+  const year = await getYear();
 
   return (
     <footer className="border-t border-line">
