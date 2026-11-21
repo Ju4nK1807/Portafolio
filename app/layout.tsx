@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { site } from "@/data/site";
 import "./globals.css";
 
 const sans = Space_Grotesk({
@@ -15,8 +16,28 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Juan Camilo Bastidas · Portafolio",
-  description: "Portafolio personal de Juan Camilo Bastidas, desarrollador de software.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} · Portafolio`,
+    template: `%s · ${site.name}`,
+  },
+  description: site.tagline,
+  authors: [{ name: site.name, url: site.github }],
+  keywords: ["portafolio", "desarrollador", "Next.js", "TypeScript", "React", site.name],
+  openGraph: {
+    type: "website",
+    locale: "es_CO",
+    url: site.url,
+    title: `${site.name} · Portafolio`,
+    description: site.tagline,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f4ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0f13" },
+  ],
 };
 
 // Aplica el tema guardado antes de pintar la página para evitar parpadeos.
