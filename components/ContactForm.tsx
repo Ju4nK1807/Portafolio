@@ -6,9 +6,10 @@ import { CheckIcon } from "./icons";
 
 type Status = "idle" | "sending" | "success" | "mailto" | "error";
 
-// Si defines NEXT_PUBLIC_FORMSPREE_ID (ver .env.example) el formulario envía
-// el mensaje con Formspree. Si no, abre el cliente de correo con el mensaje listo.
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+// Formulario de Formspree que reenvía los mensajes al correo del portafolio.
+// Se puede cambiar con la variable NEXT_PUBLIC_FORMSPREE_ID (ver .env.example).
+// Si quedara vacío, el formulario abre el cliente de correo con el mensaje listo.
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xzerjbkz";
 
 const inputClass =
   "mt-2 w-full rounded-xl border border-line bg-bg px-4 py-3 text-fg placeholder:text-muted/60 transition-colors outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 user-invalid:border-red-500";
