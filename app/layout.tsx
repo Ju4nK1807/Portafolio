@@ -19,9 +19,15 @@ export const metadata: Metadata = {
   description: "Portafolio personal de Juan Camilo Bastidas, desarrollador de software.",
 };
 
+// Aplica el tema guardado antes de pintar la página para evitar parpadeos.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");document.documentElement.classList.toggle("dark",t?t==="dark":true)}catch(e){}})();`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="es" className={`${sans.variable} ${mono.variable} dark`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );
