@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { site } from "@/data/site";
 import { CheckIcon } from "./icons";
 
-type Status = "idle" | "sending" | "success" | "error";
+type Status = "idle" | "sending" | "success" | "mailto" | "error";
 
 // Si defines NEXT_PUBLIC_FORMSPREE_ID (ver .env.example) el formulario envía
 // el mensaje con Formspree. Si no, abre el cliente de correo con el mensaje listo.
@@ -27,8 +27,7 @@ export default function ContactForm() {
       const subject = encodeURIComponent(`Contacto desde el portafolio — ${data.get("name")}`);
       const body = encodeURIComponent(`${data.get("message")}\n\n${data.get("name")} · ${data.get("email")}`);
       window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
-      form.reset();
-      setStatus("success");
+      setStatus("mailto");
       return;
     }
 
@@ -46,14 +45,19 @@ export default function ContactForm() {
     }
   }
 
-  if (status === "success") {
+  if (status === "success" || status === "mailto") {
+    const sent = status === "success";
     return (
       <div role="status" className="flex h-full flex-col items-center justify-center rounded-2xl border border-line bg-surface p-10 text-center">
         <span className="grid size-14 place-items-center rounded-full bg-accent-2/15 text-2xl text-accent-2">
           <CheckIcon />
         </span>
-        <h3 className="mt-5 text-xl font-semibold">¡Mensaje enviado!</h3>
-        <p className="mt-2 text-muted">Gracias por escribirme. Te responderé lo antes posible.</p>
+        <h3 className="mt-5 text-xl font-semibold">{sent ? "¡Mensaje enviado!" : "Tu mensaje está listo"}</h3>
+        <p className="mt-2 text-muted">
+          {sent
+            ? "Gracias por escribirme. Te responderé lo antes posible."
+            : `Se abrió tu aplicación de correo con el mensaje escrito. Dale a «Enviar» allí para que me llegue a ${site.email}.`}
+        </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
