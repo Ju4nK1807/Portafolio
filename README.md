@@ -2,3 +2,22 @@
 
 Portafolio personal desarrollado para el curso de **Diseño de Interfaces**.
 Una sola página con todas las secciones, modo claro/oscuro y diseño responsive.
+
+## Tecnologías
+
+- [Next.js](https://nextjs.org) con App Router
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Vercel](https://vercel.com) para el despliegue
+
+## Secciones
+
+1. Menú de navegación (fijo, con menú hamburguesa en celular)
+2. Bienvenida / Hero con botón para descargar el CV
+3. Acerca de mí
+4. Proyectos (con enlaces a GitHub y demo)
+5. Testimonios
+6. Experiencia académica y laboral
+7. ⭐ Habilidades (sección adicional) + modo oscuro
+8. Contacto con formulario
+9. Pie de página
