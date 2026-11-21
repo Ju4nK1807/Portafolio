@@ -47,3 +47,29 @@ section[id] {
   background: var(--accent);
   color: #fff;
 }
+
+/* ---------- Componentes reutilizables ---------- */
+@layer components {
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 48rem) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section {
+    padding-block: 6rem;
+  }
+
+  @media (min-width: 48rem) {
+    .section {
+      padding-block: 8rem;
+    }
+  }
+}
