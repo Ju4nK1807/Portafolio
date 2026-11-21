@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Mitos colombianos">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050505"/>
+      <stop offset="1" stop-color="#5b0f0f"/>
+    </linearGradient>
+    <pattern id="p" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#fff" fill-opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#g)"/>
+  <rect width="800" height="500" fill="url(#p)"/>
+  <circle cx="600" cy="150" r="70" fill="#f5f0e1" fill-opacity=".9"/><path d="M470 330c20-90 50-140 90-150 10 40 20 60 40 60s30-20 40-60c40 10 70 60 90 150z" fill="#000" fill-opacity=".85"/><g fill="#ff2a2a"><circle cx="585" cy="230" r="5"/><circle cx="615" cy="230" r="5"/></g><g stroke="#000" stroke-width="5" stroke-linecap="round" opacity=".8"><path d="M440 340l30-120M760 340l-30-120"/></g>
+  <text x="56" y="410" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="64" font-weight="700" fill="#fff">Mitos colombianos</text>
+  <text x="58" y="452" font-family="Consolas, Menlo, monospace" font-size="22" fill="#fff" fill-opacity=".8">juego 3d de terror</text>
+</svg>
