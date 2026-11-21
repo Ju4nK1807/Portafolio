@@ -11,7 +11,7 @@ export default function Projects() {
           index="02"
           eyebrow="Proyectos"
           title="Cosas que he construido."
-          description="Web, móvil, escritorio y wearables. Cada uno con su código en GitHub."
+          description="Proyectos académicos y personales: web, móvil, nube, inteligencia artificial y videojuegos."
         />
 
         <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
