@@ -1,18 +1,16 @@
 import type { QuickFact, Social } from "@/types";
 
-// Datos personales. Revisa y ajusta todo lo marcado con TODO.
+// Datos personales (tomados de la hoja de vida).
 export const site = {
   name: "Juan Camilo Bastidas",
   firstName: "Juan Camilo",
   initials: "JC",
-  role: "Desarrollador de software",
+  role: "Desarrollador Full Stack en formación",
   tagline:
-    "Construyo interfaces que se sienten simples y software que funciona de verdad: web, móvil, escritorio y hasta relojes.",
-  // TODO: reemplaza por tu correo de contacto público.
-  email: "tu-correo@ejemplo.com",
+    "Estudiante de Ingeniería de Software. Construyo aplicaciones web, móviles y backends en la nube con AWS, cuidando la arquitectura y la experiencia de quien las usa.",
+  email: "juan.bastidaspa18@gmail.com",
   github: "https://github.com/Ju4nK1807",
-  // TODO: reemplaza por la URL de tu perfil de LinkedIn.
-  linkedin: "https://www.linkedin.com/",
+  linkedin: "https://www.linkedin.com/in/juan-bastidas-917697451/",
   cv: "/cv.pdf",
   photo: "/images/perfil-cuadrada.jpg",
   photoPortrait: "/images/perfil.jpg",
@@ -23,10 +21,10 @@ export const site = {
 
 /** Roles que se escriben en el hero, uno tras otro. */
 export const roles: string[] = [
-  "desarrollador de software",
-  "diseñador de interfaces",
-  "creador de apps móviles",
-  "estudiante de ingeniería",
+  "desarrollador full stack",
+  "apps web y móviles",
+  "backends en la nube con AWS",
+  "estudiante de ingeniería de software",
 ];
 
 export const socials: Social[] = [
@@ -35,16 +33,15 @@ export const socials: Social[] = [
   { label: "Correo", href: `mailto:${site.email}`, icon: "mail" },
 ];
 
-// TODO: verifica ubicación, carrera y semestre.
 export const quickFacts: QuickFact[] = [
-  { label: "Ubicación", value: "Pasto, Colombia" },
-  { label: "Carrera", value: "Ingeniería de Software" },
+  { label: "Ubicación", value: "Pasto, Nariño" },
+  { label: "Universidad", value: "U. Cooperativa de Colombia" },
   { label: "Semestre", value: "5.º semestre" },
-  { label: "Intereses", value: "UI, videojuegos, apps móviles" },
+  { label: "Idioma", value: "Español (nativo)" },
 ];
 
 export const aboutParagraphs: string[] = [
-  "Soy estudiante de Ingeniería de Software y me gusta llevar las ideas hasta el final: desde el boceto de la interfaz hasta tenerla funcionando en el dispositivo de alguien.",
-  "He trabajado en proyectos muy distintos entre sí: un aim trainer en 3D, una app móvil que diseña muebles con IA, una aplicación de escritorio que convierte imágenes en páginas web y un registro de hábitos para Wear OS. Lo que tienen en común es el cuidado por la experiencia de quien lo usa.",
-  "Disfruto aprender herramientas nuevas, escribir código legible y trabajar en equipo. Busco oportunidades de práctica donde pueda seguir creciendo como desarrollador.",
+  "Estudio quinto semestre de Ingeniería de Software en la Universidad Cooperativa de Colombia, sede Pasto. Tengo proyectos de desarrollo web, aplicaciones móviles y despliegue en la nube con AWS.",
+  "Me interesan la arquitectura de software y los atributos de calidad: que un sistema no solo funcione, sino que aguante carga, se pueda mantener y esté bien documentado. He trabajado en equipo usando Git y GitHub, desde juegos 3D hasta sistemas para un hospital.",
+  "Busco mi primera práctica en desarrollo de software para aportar, aprender y crecer dentro de un equipo.",
 ];
