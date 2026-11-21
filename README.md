@@ -32,3 +32,24 @@ npm run build   # compilación de producción
 
 Para que el formulario envíe correos, copia `.env.example` como `.env.local` y agrega tu ID de
 [Formspree](https://formspree.io). Sin esa variable, el formulario abre tu cliente de correo.
+
+## Estructura
+
+```
+app/
+  layout.tsx      estructura global, fuentes y metadatos
+  page.tsx        une todas las secciones en orden
+  globals.css     Tailwind, colores y animaciones
+components/       un componente por sección
+data/             contenido tipado (proyectos, testimonios, experiencia…)
+types/            tipos de TypeScript
+public/
+  cv.pdf          hoja de vida
+  images/         avatar e imágenes de proyectos
+```
+
+Para cambiar el contenido solo edita los archivos de `data/`.
+
+## Despliegue
+
+Cada `git push` a `main` se publica automáticamente en Vercel.
