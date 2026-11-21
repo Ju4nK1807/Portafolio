@@ -4,9 +4,9 @@ import ExperienceItem from "./ExperienceItem";
 import Reveal from "./ui/Reveal";
 import SectionTitle from "./ui/SectionTitle";
 
-const columns: { kind: ExperienceKind; title: string; emoji: string }[] = [
-  { kind: "academica", title: "Experiencia académica", emoji: "🎓" },
-  { kind: "laboral", title: "Experiencia laboral", emoji: "💼" },
+const columns: { kind: ExperienceKind; title: string }[] = [
+  { kind: "academica", title: "Experiencia académica" },
+  { kind: "laboral", title: "Experiencia laboral" },
 ];
 
 export default function Experience() {
@@ -23,8 +23,7 @@ export default function Experience() {
         <div className="grid gap-12 md:grid-cols-2">
           {columns.map((column, index) => (
             <Reveal key={column.kind} delay={index * 150}>
-              <h3 className="mb-8 flex items-center gap-3 text-xl font-semibold">
-                <span aria-hidden="true">{column.emoji}</span>
+              <h3 className="mb-8 text-xl font-semibold">
                 {column.title}
               </h3>
               <ol className="border-l border-line">
