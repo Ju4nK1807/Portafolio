@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ---------- Paleta de colores ---------- */
 :root {
   --bg: #f6f4ef;
@@ -11,6 +13,18 @@
   --accent: #d9481e;
   --accent-2: #157a6e;
   color-scheme: light;
+}
+
+.dark {
+  --bg: #0d0f13;
+  --surface: #151820;
+  --surface-2: #1b1f29;
+  --fg: #edebe6;
+  --muted: #9ca2af;
+  --line: #262b35;
+  --accent: #ff7849;
+  --accent-2: #4fd1b5;
+  color-scheme: dark;
 }
 
 @theme inline {
