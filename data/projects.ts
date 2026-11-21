@@ -4,6 +4,39 @@ import type { Project } from "@/types";
 // TODO: completa los enlaces que faltan (repo / demo).
 export const projects: Project[] = [
   {
+    slug: "biomedictrack",
+    title: "BiomedicTrack",
+    tagline: "Gestión de equipos biomédicos · Hospital E.S.E Juan Pablo II",
+    description:
+      "Sistema para el control de equipos biomédicos de un hospital: aplicación web y app móvil que consumen la misma API REST.",
+    image: "/images/projects/biomed.svg",
+    tags: ["React", "FastAPI", "Flutter", "API REST"],
+    year: "2026",
+    status: "En desarrollo",
+  },
+  {
+    slug: "serverless-aws",
+    title: "Red social serverless",
+    tagline: "Backend en la nube con AWS",
+    description:
+      "Backend serverless para una red social universitaria, desplegado con API Gateway, Lambda, RDS, ElastiCache (Redis), S3, CloudFront y Cognito, con documentación paso a paso.",
+    image: "/images/projects/serverless.svg",
+    tags: ["AWS Lambda", "API Gateway", "RDS", "Redis", "Cognito"],
+    year: "2026",
+    status: "Terminado",
+  },
+  {
+    slug: "mitos",
+    title: "Mitos colombianos",
+    tagline: "Juego 3D de terror · equipo de 4",
+    description:
+      "Juego de terror inspirado en mitos colombianos, con modelos hechos en Blender, físicas, audio y triggers que disparan los sustos.",
+    image: "/images/projects/mitos.svg",
+    tags: ["Three.js", "Blender", "JavaScript", "Físicas"],
+    year: "2026",
+    status: "Terminado",
+  },
+  {
     slug: "reticula",
     title: "Retícula",
     tagline: "Aim trainer 3D en el navegador",
@@ -62,14 +95,14 @@ export const projects: Project[] = [
     repo: "https://github.com/ingmao021/RentaCars",
   },
   {
-    slug: "biomed",
-    title: "Equipos biomédicos",
-    tagline: "Microservicios por eventos",
+    slug: "demanda-lstm",
+    title: "Predicción de demanda eléctrica",
+    tagline: "Inteligencia artificial con LSTM",
     description:
-      "Esqueleto funcional para el mantenimiento y la tecnovigilancia de equipos biomédicos. Servicios independientes que se comunican mediante eventos a través de un broker.",
-    image: "/images/projects/biomed.svg",
-    tags: ["Python", "Microservicios", "Eventos", "Arquitectura"],
+      "Red neuronal LSTM que predice la demanda eléctrica de la hora siguiente a partir del histórico de consumo.",
+    image: "/images/projects/lstm.svg",
+    tags: ["Python", "LSTM", "Redes neuronales", "Series de tiempo"],
     year: "2026",
-    status: "En desarrollo",
+    status: "Terminado",
   },
 ];
