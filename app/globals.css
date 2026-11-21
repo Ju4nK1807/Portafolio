@@ -101,3 +101,12 @@ section[id] {
   opacity: 1;
   transform: none;
 }
+
+/* ---------- Fondo cuadriculado del hero ---------- */
+.bg-grid {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 30% 40%, black 20%, transparent 70%);
+}
