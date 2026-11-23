@@ -1,7 +1,7 @@
 import type { Project } from "@/types";
 
 // Cada proyecto debe tener enlace a GitHub y, si existe, a su demo en vivo.
-// Los proyectos con `trailer` aparecen también en la sección de Trailers.
+// Los proyectos con `trailer` muestran el video en la ventana de detalle.
 export const projects: Project[] = [
   {
     slug: "reticula",

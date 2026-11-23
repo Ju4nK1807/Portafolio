@@ -15,13 +15,12 @@ Una sola página con todas las secciones, modo claro/oscuro y diseño responsive
 1. Menú de navegación (fijo, con menú hamburguesa en celular)
 2. Bienvenida / Hero con botón para descargar el CV
 3. Acerca de mí
-4. Proyectos (con enlaces a GitHub y demo)
-5. ⭐ Trailers en video de los proyectos (sección adicional)
-6. Testimonios
-7. Experiencia académica y laboral
-8. ⭐ Habilidades (sección adicional) + modo oscuro
-9. Contacto con formulario (Formspree)
-10. Pie de página
+4. Proyectos: al hacer clic se abre una ventana con el trailer, la descripción y los enlaces
+5. Testimonios
+6. Experiencia académica y laboral
+7. ⭐ Habilidades (sección adicional) + modo oscuro
+8. Contacto con formulario (Formspree)
+9. Pie de página
 
 ## Cómo ejecutarlo
 

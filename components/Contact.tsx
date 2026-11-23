@@ -11,7 +11,7 @@ export default function Contact() {
       <div className="container-page grid gap-12 lg:grid-cols-2">
         <Reveal>
           <SectionTitle
-            index="07"
+            index="06"
             eyebrow="Contacto"
             title="Hablemos."
             description="¿Un proyecto, una práctica o una pregunta? Escríbeme y te respondo."

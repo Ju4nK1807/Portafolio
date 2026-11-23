@@ -9,7 +9,7 @@ export default function Skills() {
     <section id="habilidades" className="section">
       <div className="container-page">
         <SectionTitle
-          index="06"
+          index="05"
           eyebrow="Habilidades"
           title="Con qué construyo."
           description="Lenguajes, frameworks y herramientas que uso en mis proyectos."

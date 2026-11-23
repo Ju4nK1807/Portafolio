@@ -1,16 +1,18 @@
 import Image from "next/image";
 import type { Project } from "@/types";
-import { ExternalIcon, GithubIcon, PlayIcon } from "./icons";
+import { ArrowRightIcon, PlayIcon } from "./icons";
 
 type ProjectCardProps = {
   project: Project;
+  onOpen: (project: Project) => void;
 };
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+/** Tarjeta resumida. Al hacer clic abre la ventana con el detalle del proyecto. */
+export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10">
+    <article className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 focus-within:border-accent hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10">
       <div
-        className={`relative aspect-[16/10] overflow-hidden border-b border-line ${project.imageFit === "contain" ? "bg-white" : ""}`}
+        className={`relative aspect-[16/10] w-full overflow-hidden border-b border-line ${project.imageFit === "contain" ? "bg-white" : ""}`}
       >
         <Image
           src={project.image}
@@ -24,59 +26,52 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         >
           {project.status}
         </span>
+        {project.trailer && (
+          <span
+            className="absolute inset-0 grid place-items-center bg-black/0 transition-colors duration-300 group-hover:bg-black/40"
+            aria-hidden="true"
+          >
+            <span className="grid size-14 scale-75 place-items-center rounded-full bg-accent text-xl text-accent-fg opacity-0 shadow-lg shadow-accent/40 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+              <PlayIcon className="translate-x-0.5" />
+            </span>
+          </span>
+        )}
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex w-full flex-1 flex-col p-6">
         <div className="flex items-baseline justify-between gap-4">
-          <h3 className="text-xl font-semibold">{project.title}</h3>
+          <h3 className="text-xl font-semibold">
+            {/* El botón se estira (after:inset-0) para que toda la tarjeta sea clicable. */}
+            <button
+              type="button"
+              onClick={() => onOpen(project)}
+              aria-haspopup="dialog"
+              className="text-left outline-none after:absolute after:inset-0 after:content-['']"
+            >
+              {project.title}
+            </button>
+          </h3>
           <span className="font-mono text-xs text-muted">{project.year}</span>
         </div>
         <p className="mt-1 text-sm text-accent">{project.tagline}</p>
-        <p className="mt-4 flex-1 text-pretty text-muted">{project.description}</p>
+        <p className="mt-4 line-clamp-2 flex-1 text-pretty text-muted">{project.description}</p>
 
         <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tecnologías">
-          {project.tags.map((tag) => (
+          {project.tags.slice(0, 3).map((tag) => (
             <li key={tag} className="rounded-md bg-surface-2 px-2 py-1 font-mono text-xs text-muted">
               {tag}
             </li>
           ))}
+          {project.tags.length > 3 && (
+            <li className="rounded-md px-2 py-1 font-mono text-xs text-muted">+{project.tags.length - 3}</li>
+          )}
         </ul>
 
-        <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 border-t border-line pt-5 text-sm font-medium">
-          {project.repo ? (
-            <a
-              href={project.repo}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 transition-colors hover:text-accent"
-            >
-              <GithubIcon /> Código
-            </a>
-          ) : (
-            <span className="inline-flex items-center gap-2 text-muted" title="Repositorio privado">
-              <GithubIcon /> Privado
-            </span>
-          )}
-          {project.trailer && (
-            <a
-              href={`#trailer-${project.slug}`}
-              className="inline-flex items-center gap-2 transition-colors hover:text-accent"
-            >
-              <PlayIcon /> Trailer
-            </a>
-          )}
-          {project.demo ? (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noreferrer"
-              className="ml-auto inline-flex items-center gap-2 transition-colors hover:text-accent"
-            >
-              Ver demo <ExternalIcon />
-            </a>
-          ) : (
-            <span className="ml-auto inline-flex items-center gap-2 text-muted">Demo próximamente</span>
-          )}
+        <div className="mt-6 flex items-center justify-between border-t border-line pt-5 font-mono text-sm font-medium" aria-hidden="true">
+          <span className="text-muted">{project.trailer ? "▶ trailer + detalles" : "ver detalles"}</span>
+          <span className="inline-flex items-center gap-2 text-accent">
+            abrir <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
+          </span>
         </div>
       </div>
     </article>
