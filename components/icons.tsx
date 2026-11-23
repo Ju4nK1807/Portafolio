@@ -136,3 +136,9 @@ export function SocialIconFor({ icon, ...props }: IconProps & { icon: SocialIcon
   const Icon = socialIcons[icon];
   return <Icon {...props} />;
 }
+
+export const PlayIcon = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true" {...props}>
+    <path d="M7 4.5v15a1 1 0 0 0 1.52.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5Z" />
+  </svg>
+);

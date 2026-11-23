@@ -26,6 +26,10 @@ export type Project = {
   tagline: string;
   description: string;
   image: string;
+  /** "contain" para logos que no deben recortarse. Por defecto "cover". */
+  imageFit?: "cover" | "contain";
+  /** Ruta al trailer en /public/videos. */
+  trailer?: string;
   tags: string[];
   year: string;
   status: ProjectStatus;

@@ -8,7 +8,7 @@ export default function Testimonials() {
     <section id="testimonios" className="section">
       <div className="container-page">
         <SectionTitle
-          index="03"
+          index="04"
           eyebrow="Testimonios"
           title="Lo que dicen quienes han trabajado conmigo."
         />

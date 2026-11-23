@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Project } from "@/types";
-import { ExternalIcon, GithubIcon } from "./icons";
+import { ExternalIcon, GithubIcon, PlayIcon } from "./icons";
 
 type ProjectCardProps = {
   project: Project;
@@ -9,14 +9,15 @@ type ProjectCardProps = {
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10">
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
+      <div
+        className={`relative aspect-[16/10] overflow-hidden border-b border-line ${project.imageFit === "contain" ? "bg-white" : ""}`}
+      >
         <Image
           src={project.image}
           alt={`Vista previa de ${project.title}`}
           fill
-          unoptimized
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className={`transition-transform duration-500 group-hover:scale-105 ${project.imageFit === "contain" ? "object-contain p-6" : "object-cover"}`}
         />
         <span
           className={`absolute top-3 left-3 rounded-full px-2.5 py-1 font-mono text-[11px] font-medium backdrop-blur ${project.status === "Terminado" ? "bg-accent-2/90 text-black" : "bg-bg/80 text-fg"}`}
@@ -41,7 +42,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </ul>
 
-        <div className="mt-6 flex gap-3 border-t border-line pt-5 text-sm font-medium">
+        <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 border-t border-line pt-5 text-sm font-medium">
           {project.repo ? (
             <a
               href={project.repo}
@@ -55,6 +56,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <span className="inline-flex items-center gap-2 text-muted" title="Repositorio privado">
               <GithubIcon /> Privado
             </span>
+          )}
+          {project.trailer && (
+            <a
+              href={`#trailer-${project.slug}`}
+              className="inline-flex items-center gap-2 transition-colors hover:text-accent"
+            >
+              <PlayIcon /> Trailer
+            </a>
           )}
           {project.demo ? (
             <a

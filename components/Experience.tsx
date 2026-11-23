@@ -14,7 +14,7 @@ export default function Experience() {
     <section id="experiencia" className="section bg-surface-2/40">
       <div className="container-page">
         <SectionTitle
-          index="04"
+          index="05"
           eyebrow="Experiencia"
           title="Lo que he estudiado y hecho."
           description="Ordenado de lo más reciente a lo más antiguo."
