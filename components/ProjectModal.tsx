@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type { Project } from "@/types";
-import { CloseIcon, ExternalIcon, GithubIcon } from "./icons";
+import { CloseIcon, ExternalIcon } from "./icons";
 
 type ProjectModalProps = {
   project: Project | null;
@@ -118,36 +118,18 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </ul>
               </div>
 
-              <div className="flex flex-wrap gap-3 border-t border-line pt-6 font-mono text-sm">
-                {project.repo ? (
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 font-semibold text-accent-fg transition-opacity hover:opacity-90"
-                  >
-                    <GithubIcon /> Ver código
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 text-muted">
-                    <GithubIcon /> Repositorio privado
-                  </span>
-                )}
-                {project.demo ? (
+              {project.demo && (
+                <div className="border-t border-line pt-6 font-mono text-sm">
                   <a
                     href={project.demo}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-md border border-accent/40 px-4 py-2.5 transition-colors hover:border-accent hover:text-accent"
+                    className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 font-semibold text-accent-fg transition-opacity hover:opacity-90"
                   >
                     Ver demo <ExternalIcon />
                   </a>
-                ) : (
-                  <span className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 text-muted">
-                    Demo próximamente
-                  </span>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
