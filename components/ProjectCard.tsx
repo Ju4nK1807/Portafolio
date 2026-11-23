@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Project } from "@/types";
-import { ArrowRightIcon, PlayIcon } from "./icons";
+import { PlayIcon } from "./icons";
 
 type ProjectCardProps = {
   project: Project;
@@ -66,13 +66,6 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
             <li className="rounded-md px-2 py-1 font-mono text-xs text-muted">+{project.tags.length - 3}</li>
           )}
         </ul>
-
-        <div className="mt-6 flex items-center justify-between border-t border-line pt-5 font-mono text-sm font-medium" aria-hidden="true">
-          <span className="text-muted">{project.trailer ? "▶ trailer + detalles" : "ver detalles"}</span>
-          <span className="inline-flex items-center gap-2 text-accent">
-            abrir <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
-          </span>
-        </div>
       </div>
     </article>
   );
