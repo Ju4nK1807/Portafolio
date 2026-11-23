@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useI18n } from "./i18n/I18nProvider";
 import { CheckIcon, CopyIcon } from "./icons";
 
 type CopyEmailButtonProps = {
@@ -8,6 +9,7 @@ type CopyEmailButtonProps = {
 };
 
 export default function CopyEmailButton({ email }: CopyEmailButtonProps) {
+  const { dict } = useI18n();
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function CopyEmailButton({ email }: CopyEmailButtonProps) {
       className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-accent"
     >
       {copied ? <CheckIcon className="text-accent-2" /> : <CopyIcon />}
-      <span aria-live="polite">{copied ? "¡Copiado!" : "Copiar correo"}</span>
+      <span aria-live="polite">{copied ? dict.contact.copied : dict.contact.copy}</span>
     </button>
   );
 }

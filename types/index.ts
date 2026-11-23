@@ -1,10 +1,5 @@
 // Tipos compartidos por todo el portafolio.
 
-export type NavLink = {
-  id: string;
-  label: string;
-};
-
 export type SocialIcon = "github" | "linkedin" | "mail";
 
 export type Social = {

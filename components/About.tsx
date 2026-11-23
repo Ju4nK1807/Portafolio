@@ -1,20 +1,26 @@
 import Image from "next/image";
-import { aboutParagraphs, quickFacts, site } from "@/data/site";
-import { skillGroups } from "@/data/skills";
+import { getProfile, site } from "@/data/site";
+import { getSkillGroups } from "@/data/skills";
+import { getDictionary } from "@/dictionaries";
+import { fill, type Locale } from "@/lib/i18n";
 import Reveal from "./ui/Reveal";
 import SectionTitle from "./ui/SectionTitle";
 
-const highlightSkills = skillGroups.flatMap((group) => group.items).slice(0, 12);
+export default function About({ lang }: { lang: Locale }) {
+  const t = getDictionary(lang).about;
+  const { role, quickFacts, aboutParagraphs } = getProfile(lang);
+  const highlightSkills = getSkillGroups(lang)
+    .flatMap((group) => group.items)
+    .slice(0, 12);
 
-export default function About() {
   return (
     <section id="sobre-mi" className="section">
       <div className="container-page">
         <SectionTitle
           index="01"
-          eyebrow="Acerca de mí"
-          title="Del boceto al dispositivo."
-          description="Un poco de quién soy, qué estudio y qué me gusta construir."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
 
         <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
@@ -28,7 +34,7 @@ export default function About() {
               <div className="relative aspect-[3/4]">
                 <Image
                   src={site.photoPortrait}
-                  alt={`Foto de ${site.name}`}
+                  alt={`${getDictionary(lang).hud.photoOf} ${site.name}`}
                   fill
                   sizes="(min-width: 768px) 24rem, 90vw"
                   className="object-cover transition duration-500 group-hover:scale-[1.02]"
@@ -53,14 +59,14 @@ export default function About() {
 
           <Reveal delay={150} className="space-y-5 text-lg leading-relaxed text-pretty text-muted">
             <p className="text-2xl leading-snug text-fg">
-              Soy {site.name}, {site.role.toLowerCase()} y estudiante.
+              {fill(t.intro, { name: site.name, role: role.toLowerCase() })}
             </p>
             {aboutParagraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
             ))}
 
             <div className="pt-4">
-              <h3 className="font-mono text-xs text-muted uppercase">Tecnologías que uso</h3>
+              <h3 className="font-mono text-xs text-muted uppercase">{t.tech}</h3>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {highlightSkills.map((skill) => (
                   <li key={skill} className="rounded-md border border-line px-3 py-1 font-mono text-sm text-fg">

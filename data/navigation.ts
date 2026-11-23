@@ -1,14 +1,13 @@
-import type { NavLink } from "@/types";
-
 // El orden de este arreglo es el mismo orden de las secciones en la página.
-export const navLinks: NavLink[] = [
-  { id: "inicio", label: "Inicio" },
-  { id: "sobre-mi", label: "Sobre mí" },
-  { id: "proyectos", label: "Proyectos" },
-  { id: "testimonios", label: "Testimonios" },
-  { id: "experiencia", label: "Experiencia" },
-  { id: "habilidades", label: "Habilidades" },
-  { id: "contacto", label: "Contacto" },
-];
+// Los nombres que se muestran están en dictionaries/ (clave `nav`).
+export const sectionIds = [
+  "inicio",
+  "sobre-mi",
+  "proyectos",
+  "testimonios",
+  "experiencia",
+  "habilidades",
+  "contacto",
+] as const;
 
-export const sectionIds: string[] = navLinks.map((link) => link.id);
+export type SectionId = (typeof sectionIds)[number];

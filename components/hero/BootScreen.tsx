@@ -2,20 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { site } from "@/data/site";
-
-const LINES = [
-  `> ssh invitado@${site.initials.toLowerCase()}.dev`,
-  "  conexión establecida ✓",
-  "> cargando módulos [ui, proyectos, experiencia]",
-  "> compilando shaders…",
-  "> ./portafolio --iniciar",
-];
+import { useI18n } from "../i18n/I18nProvider";
 
 const DURATION = 1600;
 const KEY = "boot-visto";
 
 /** Pantalla de arranque tipo terminal. Se muestra una vez por sesión. */
 export default function BootScreen() {
+  const { dict } = useI18n();
+  const user = dict.hero.prompt.split("@")[0];
+  const lines = [`> ssh ${user}@${site.initials.toLowerCase()}.dev`, ...dict.boot.lines];
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<"running" | "leaving" | "done">("running");
 
@@ -52,18 +48,18 @@ export default function BootScreen() {
 
   if (phase === "done") return null;
 
-  const visibleLines = Math.ceil(progress * LINES.length);
+  const visibleLines = Math.ceil(progress * lines.length);
 
   return (
     <div
       role="status"
-      aria-label="Cargando portafolio"
+      aria-label={dict.boot.loading}
       className={`fixed inset-0 z-[70] flex items-center justify-center bg-bg font-mono text-sm transition-opacity duration-500 ${phase === "leaving" ? "pointer-events-none opacity-0" : "opacity-100"}`}
     >
       <span className="scanlines pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="w-[min(32rem,90vw)]">
         <ul className="space-y-1 text-accent">
-          {LINES.slice(0, Math.max(1, visibleLines)).map((line) => (
+          {lines.slice(0, Math.max(1, visibleLines)).map((line) => (
             <li key={line} className={line.startsWith(">") ? "" : "text-muted"}>
               {line}
             </li>

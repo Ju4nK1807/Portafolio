@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { useI18n } from "./i18n/I18nProvider";
 import { MoonIcon, SunIcon } from "./icons";
 
 function subscribe(callback: () => void) {
@@ -14,6 +15,7 @@ const getServerSnapshot = () => true;
 
 /** Botón para cambiar entre modo oscuro y modo claro. */
 export default function ThemeToggle() {
+  const { dict } = useI18n();
   const dark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   function toggle() {
@@ -30,8 +32,8 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={dark ? "Activar modo claro" : "Activar modo oscuro"}
-      title={dark ? "Modo claro" : "Modo oscuro"}
+      aria-label={dark ? dict.theme.toLight : dict.theme.toDark}
+      title={dark ? dict.theme.light : dict.theme.dark}
       className="grid size-10 place-items-center rounded-full border border-line text-lg text-muted transition-colors hover:border-accent hover:text-fg"
     >
       {dark ? <SunIcon /> : <MoonIcon />}

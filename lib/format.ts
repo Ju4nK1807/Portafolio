@@ -1,15 +1,13 @@
-const MONTHS = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-
-/** "2024-07" -> "Jul 2024" */
-export function formatMonth(value: string): string {
+/** "2024-07" -> "Jul 2024" (los nombres de los meses vienen del diccionario). */
+export function formatMonth(value: string, months: string[]): string {
   const [year, month] = value.split("-");
-  const index = Number(month) - 1;
-  return MONTHS[index] ? `${MONTHS[index]} ${year}` : year;
+  const name = months[Number(month) - 1];
+  return name ? `${name} ${year}` : year;
 }
 
 /** Rango de fechas legible: "Jul 2024 — Actualidad" */
-export function formatRange(start: string, end: string | null): string {
-  return `${formatMonth(start)} — ${end ? formatMonth(end) : "Actualidad"}`;
+export function formatRange(start: string, end: string | null, months: string[], present: string): string {
+  return `${formatMonth(start, months)} — ${end ? formatMonth(end, months) : present}`;
 }
 
 /** "Juan Camilo Bastidas" -> "JB" */

@@ -1,5 +1,7 @@
-import { navLinks } from "@/data/navigation";
-import { site, socials } from "@/data/site";
+import { sectionIds } from "@/data/navigation";
+import { getProfile, getSocials, site } from "@/data/site";
+import { getDictionary } from "@/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import { ArrowUpIcon, SocialIconFor } from "./icons";
 
 /** Año para el ©. Se calcula al compilar y queda en caché. */
@@ -8,8 +10,10 @@ async function getYear() {
   return new Date().getFullYear();
 }
 
-export default async function Footer() {
+export default async function Footer({ lang }: { lang: Locale }) {
   const year = await getYear();
+  const dict = getDictionary(lang);
+  const t = dict.footer;
 
   return (
     <footer className="border-t border-line">
@@ -20,9 +24,9 @@ export default async function Footer() {
             {site.name}
             <span className="text-accent"> /&gt;</span>
           </p>
-          <p className="mt-3 max-w-sm text-muted">{site.role}. Gracias por pasar por aquí.</p>
-          <ul className="mt-6 flex gap-3" aria-label="Redes">
-            {socials.map((social) => (
+          <p className="mt-3 max-w-sm text-muted">{getProfile(lang).role}. {t.thanks}</p>
+          <ul className="mt-6 flex gap-3" aria-label={dict.hero.socials}>
+            {getSocials(lang).map((social) => (
               <li key={social.label}>
                 <a
                   href={social.href}
@@ -38,13 +42,13 @@ export default async function Footer() {
           </ul>
         </div>
 
-        <nav aria-label="Enlaces rápidos">
-          <h2 className="font-mono text-xs text-muted uppercase">Enlaces rápidos</h2>
+        <nav aria-label={t.quickLinks}>
+          <h2 className="font-mono text-xs text-muted uppercase">{t.quickLinks}</h2>
           <ul className="mt-4 grid grid-cols-2 gap-2 text-sm">
-            {navLinks.map((link) => (
-              <li key={link.id}>
-                <a href={`#${link.id}`} className="text-muted transition-colors hover:text-fg">
-                  {link.label}
+            {sectionIds.map((id) => (
+              <li key={id}>
+                <a href={`#${id}`} className="text-muted transition-colors hover:text-fg">
+                  {dict.nav[id]}
                 </a>
               </li>
             ))}
@@ -55,16 +59,16 @@ export default async function Footer() {
           href="#inicio"
           className="inline-flex h-fit items-center gap-2 self-start rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-accent hover:text-accent"
         >
-          <ArrowUpIcon /> Volver arriba
+          <ArrowUpIcon /> {t.backToTop}
         </a>
       </div>
 
       <div className="border-t border-line">
         <div className="container-page flex flex-col gap-2 py-6 text-sm text-muted sm:flex-row sm:justify-between">
           <p>
-            © {year} {site.name}. Todos los derechos reservados.
+            © {year} {site.name}. {t.rights}
           </p>
-          <p>Hecho con Next.js, TypeScript y Tailwind CSS · Desplegado en Vercel</p>
+          <p>{t.madeWith}</p>
         </div>
       </div>
     </footer>

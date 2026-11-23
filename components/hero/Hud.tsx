@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useSyncExternalStore } from "react";
-import { quickFacts, site } from "@/data/site";
+import { site } from "@/data/site";
+import { useI18n } from "../i18n/I18nProvider";
 
 // ---- Fuentes de datos "en vivo" para el panel ----
 
@@ -12,8 +13,7 @@ function subscribeClock(callback: () => void) {
   const id = setInterval(callback, 1000);
   return () => clearInterval(id);
 }
-const getTime = () =>
-  new Date().toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
+const timeFormat: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false };
 
 function subscribeResize(callback: () => void) {
   window.addEventListener("resize", callback);
@@ -28,29 +28,34 @@ function getBrowser() {
   if (/Firefox\//.test(ua)) return "Firefox";
   if (/Chrome\//.test(ua)) return "Chrome";
   if (/Safari\//.test(ua)) return "Safari";
-  return "Desconocido";
+  return "";
 }
 
 const COMMIT = (process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? "dev").slice(0, 7);
-const location = quickFacts.find((fact) => fact.label === "Ubicación")?.value ?? "";
 
 /** Panel de metadatos estilo terminal con la "credencial" del autor. */
 export default function Hud() {
-  const time = useSyncExternalStore(subscribeClock, getTime, () => "--:--:--");
+  const { dict } = useI18n();
+  const t = dict.hud;
+  const time = useSyncExternalStore(
+    subscribeClock,
+    () => new Date().toLocaleTimeString(t.timeLocale, timeFormat),
+    () => "--:--:--",
+  );
   const viewport = useSyncExternalStore(subscribeResize, getViewport, () => "----×----");
   const browser = useSyncExternalStore(noop, getBrowser, () => "…");
 
   const rows: [string, string][] = [
     ["commit", COMMIT],
-    ["navegador", browser],
-    ["hora local", time],
-    ["pantalla", viewport],
-    ["ubicación", location],
+    [t.browser, browser || t.unknownBrowser],
+    [t.time, time],
+    [t.screen, viewport],
+    [t.location, site.location],
   ];
 
   return (
     <aside
-      aria-label="Metadatos"
+      aria-label={t.label}
       className="w-full max-w-xs rounded-lg border border-accent/30 bg-bg/70 font-mono text-xs backdrop-blur-sm"
     >
       <div className="flex items-center justify-between border-b border-accent/30 px-3 py-2 text-accent">
@@ -64,14 +69,14 @@ export default function Hud() {
 
       <div className="flex gap-3 border-b border-accent/30 p-3">
         <div className="relative size-16 shrink-0 overflow-hidden rounded border border-accent/40">
-          <Image src={site.photo} alt={`Foto de ${site.name}`} fill unoptimized sizes="64px" className="object-cover grayscale" />
+          <Image src={site.photo} alt={`${t.photoOf} ${site.name}`} fill unoptimized sizes="64px" className="object-cover grayscale" />
           <span className="scanlines absolute inset-0" aria-hidden="true" />
         </div>
         <div className="min-w-0 leading-relaxed">
           <p className="text-muted">ID://{site.initials}-0001</p>
           <p className="truncate text-fg">{site.name}</p>
           <p className="text-accent">
-            {site.available ? "● disponible" : "○ ocupado"}
+            {site.available ? t.available : t.busy}
           </p>
         </div>
       </div>

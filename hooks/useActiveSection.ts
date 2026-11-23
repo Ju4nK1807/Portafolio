@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 /** Devuelve el id de la sección que está en el centro de la pantalla. */
-export function useActiveSection(ids: string[]): string {
+export function useActiveSection(ids: readonly string[]): string {
   const [active, setActive] = useState(ids[0] ?? "");
 
   useEffect(() => {

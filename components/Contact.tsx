@@ -1,20 +1,24 @@
-import { site, socials } from "@/data/site";
+import { getSocials, site } from "@/data/site";
+import { getDictionary } from "@/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import ContactForm from "./ContactForm";
 import CopyEmailButton from "./CopyEmailButton";
 import { MailIcon, SocialIconFor } from "./icons";
 import Reveal from "./ui/Reveal";
 import SectionTitle from "./ui/SectionTitle";
 
-export default function Contact() {
+export default function Contact({ lang }: { lang: Locale }) {
+  const t = getDictionary(lang).contact;
+
   return (
     <section id="contacto" className="section bg-surface-2/40">
       <div className="container-page grid gap-12 lg:grid-cols-2">
         <Reveal>
           <SectionTitle
             index="06"
-            eyebrow="Contacto"
-            title="Hablemos."
-            description="¿Un proyecto, una práctica o una pregunta? Escríbeme y te respondo."
+            eyebrow={t.eyebrow}
+            title={t.title}
+            description={t.description}
           />
 
           <div className="space-y-6">
@@ -29,7 +33,7 @@ export default function Contact() {
             </div>
 
             <ul className="flex flex-wrap gap-3">
-              {socials
+              {getSocials(lang)
                 .filter((social) => social.icon !== "mail")
                 .map((social) => (
                   <li key={social.label}>

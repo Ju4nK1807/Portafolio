@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type { Project } from "@/types";
+import { useI18n } from "./i18n/I18nProvider";
 import { CloseIcon, ExternalIcon } from "./icons";
 
 type ProjectModalProps = {
@@ -12,6 +13,8 @@ type ProjectModalProps = {
 
 /** Ventana con el detalle de un proyecto: trailer (o imagen), descripción, tecnologías y enlaces. */
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const { dict } = useI18n();
+  const t = dict.projects;
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   // El estado de React manda: con proyecto se abre, sin proyecto se cierra.
@@ -56,7 +59,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <button
               type="button"
               onClick={onClose}
-              aria-label="Cerrar"
+              aria-label={t.close}
               className="grid size-8 shrink-0 place-items-center rounded-md border border-line text-base text-muted transition-colors hover:border-accent hover:text-accent"
             >
               <CloseIcon />
@@ -73,15 +76,15 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 autoPlay
                 playsInline
                 className="aspect-video w-full bg-black object-contain"
-                aria-label={`Trailer de ${project.title}`}
+                aria-label={`${t.trailerOf} ${project.title}`}
               >
-                Tu navegador no puede reproducir este video.
+                {t.noVideo}
               </video>
             ) : (
               <div className={`relative aspect-video ${project.imageFit === "contain" ? "bg-white" : "bg-black"}`}>
                 <Image
                   src={project.image}
-                  alt={`Vista previa de ${project.title}`}
+                  alt={`${t.preview} ${project.title}`}
                   fill
                   sizes="(min-width: 896px) 56rem, 100vw"
                   className={project.imageFit === "contain" ? "object-contain p-8" : "object-cover"}
@@ -95,7 +98,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   <span
                     className={`rounded-full px-2.5 py-1 font-medium ${project.status === "Terminado" ? "bg-accent-2/90 text-black" : "bg-surface-2 text-fg"}`}
                   >
-                    {project.status}
+                    {t.status[project.status]}
                   </span>
                   <span className="text-muted">{project.year}</span>
                 </div>
@@ -108,7 +111,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <p className="text-lg leading-relaxed text-pretty text-muted">{project.description}</p>
 
               <div>
-                <h4 className="font-mono text-xs text-muted uppercase">Tecnologías</h4>
+                <h4 className="font-mono text-xs text-muted uppercase">{t.tech}</h4>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <li key={tag} className="rounded-md border border-line px-2.5 py-1 font-mono text-sm">
@@ -126,7 +129,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 font-semibold text-accent-fg transition-opacity hover:opacity-90"
                   >
-                    Ver demo <ExternalIcon />
+                    {t.demo} <ExternalIcon />
                   </a>
                 </div>
               )}

@@ -1,4 +1,6 @@
-import { roles, site, socials } from "@/data/site";
+import { getProfile, getSocials, site } from "@/data/site";
+import { getDictionary } from "@/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import BootScreen from "./hero/BootScreen";
 import DitherBackground from "./hero/DitherBackground";
 import Hud from "./hero/Hud";
@@ -6,7 +8,10 @@ import ScrambleText from "./hero/ScrambleText";
 import Typewriter from "./hero/Typewriter";
 import { ArrowRightIcon, DownloadIcon, SocialIconFor } from "./icons";
 
-export default function Hero() {
+export default function Hero({ lang }: { lang: Locale }) {
+  const dict = getDictionary(lang);
+  const profile = getProfile(lang);
+
   return (
     <section id="inicio" className="relative flex min-h-svh flex-col overflow-hidden">
       <BootScreen />
@@ -31,7 +36,7 @@ export default function Hero() {
 
         <div className="max-w-3xl">
           <p className="font-mono text-sm text-accent">
-            <span className="text-muted">invitado@portafolio:~$</span> whoami
+            <span className="text-muted">{dict.hero.prompt}</span> whoami
           </p>
 
           <h1 className="mt-4 font-mono text-5xl leading-[1.02] font-bold tracking-tighter sm:text-6xl xl:text-8xl">
@@ -41,10 +46,10 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 font-mono text-lg text-fg sm:text-2xl">
-            <span className="text-accent">&gt;</span> <Typewriter words={roles} />
+            <span className="text-accent">&gt;</span> <Typewriter key={lang} words={profile.roles} />
           </p>
 
-          <p className="mt-6 max-w-xl text-lg text-pretty text-muted">{site.tagline}</p>
+          <p className="mt-6 max-w-xl text-lg text-pretty text-muted">{profile.tagline}</p>
 
           <div className="mt-10 flex flex-wrap gap-3 font-mono text-sm">
             <a
@@ -52,19 +57,19 @@ export default function Hero() {
               download
               className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 font-semibold text-accent-fg shadow-[0_0_24px] shadow-accent/40 transition-transform hover:-translate-y-0.5"
             >
-              <DownloadIcon /> ./descargar_cv
+              <DownloadIcon /> {dict.hero.downloadCv}
             </a>
             <a
               href="#proyectos"
               className="group inline-flex items-center gap-2 rounded-md border border-accent/40 bg-bg/60 px-5 py-3 backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
             >
-              ver_proyectos
+              {dict.hero.viewProjects}
               <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
             </a>
           </div>
 
-          <ul className="mt-10 flex gap-3" aria-label="Redes">
-            {socials.map((social) => (
+          <ul className="mt-10 flex gap-3" aria-label={dict.hero.socials}>
+            {getSocials(lang).map((social) => (
               <li key={social.label}>
                 <a
                   href={social.href}

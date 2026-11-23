@@ -1,25 +1,29 @@
-import { marqueeSkills, skillGroups } from "@/data/skills";
+import { getSkillGroups, marqueeSkills } from "@/data/skills";
+import { getDictionary } from "@/dictionaries";
+import type { Locale } from "@/lib/i18n";
 import Marquee from "./Marquee";
 import Reveal from "./ui/Reveal";
 import SectionTitle from "./ui/SectionTitle";
 
 /** Sección adicional: habilidades y herramientas. */
-export default function Skills() {
+export default function Skills({ lang }: { lang: Locale }) {
+  const t = getDictionary(lang).skills;
+
   return (
     <section id="habilidades" className="section">
       <div className="container-page">
         <SectionTitle
           index="05"
-          eyebrow="Habilidades"
-          title="Con qué construyo."
-          description="Lenguajes, frameworks y herramientas que uso en mis proyectos."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
       </div>
 
-      <Marquee items={marqueeSkills} />
+      <Marquee items={marqueeSkills} label={t.marquee} />
 
       <div className="container-page mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {skillGroups.map((group, index) => (
+        {getSkillGroups(lang).map((group, index) => (
           <Reveal key={group.title} delay={index * 100}>
             <div className="h-full rounded-2xl border border-line bg-surface p-6">
               <h3 className="font-mono text-sm text-accent">{group.title}</h3>

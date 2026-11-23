@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Project } from "@/types";
+import { useI18n } from "./i18n/I18nProvider";
 import { PlayIcon } from "./icons";
 
 type ProjectCardProps = {
@@ -9,6 +10,8 @@ type ProjectCardProps = {
 
 /** Tarjeta resumida. Al hacer clic abre la ventana con el detalle del proyecto. */
 export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
+  const { dict } = useI18n();
+
   return (
     <article className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 focus-within:border-accent hover:-translate-y-1 hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10">
       <div
@@ -16,7 +19,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
       >
         <Image
           src={project.image}
-          alt={`Vista previa de ${project.title}`}
+          alt={`${dict.projects.preview} ${project.title}`}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           className={`transition-transform duration-500 group-hover:scale-105 ${project.imageFit === "contain" ? "object-contain p-6" : "object-cover"}`}
@@ -24,7 +27,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
         <span
           className={`absolute top-3 left-3 rounded-full px-2.5 py-1 font-mono text-[11px] font-medium backdrop-blur ${project.status === "Terminado" ? "bg-accent-2/90 text-black" : "bg-bg/80 text-fg"}`}
         >
-          {project.status}
+          {dict.projects.status[project.status]}
         </span>
         {project.trailer && (
           <span
@@ -56,7 +59,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
         <p className="mt-1 text-sm text-accent">{project.tagline}</p>
         <p className="mt-4 line-clamp-2 flex-1 text-pretty text-muted">{project.description}</p>
 
-        <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tecnologías">
+        <ul className="mt-5 flex flex-wrap gap-2" aria-label={dict.projects.tech}>
           {project.tags.slice(0, 3).map((tag) => (
             <li key={tag} className="rounded-md bg-surface-2 px-2 py-1 font-mono text-xs text-muted">
               {tag}

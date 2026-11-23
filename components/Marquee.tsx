@@ -1,12 +1,13 @@
 type MarqueeProps = {
   items: string[];
+  label: string;
 };
 
 /** Cinta que se desplaza sin fin. La lista se duplica para que el bucle no tenga saltos. */
-export default function Marquee({ items }: MarqueeProps) {
+export default function Marquee({ items, label }: MarqueeProps) {
   return (
     <div className="relative overflow-hidden border-y border-line py-6 [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
-      <ul className="animate-marquee flex w-max gap-10" aria-label="Tecnologías">
+      <ul className="animate-marquee flex w-max gap-10" aria-label={label}>
         {[...items, ...items].map((item, index) => (
           <li
             key={`${item}-${index}`}

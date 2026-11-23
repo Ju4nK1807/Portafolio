@@ -1,7 +1,8 @@
 # Portafolio · Juan Camilo Bastidas
 
 Portafolio personal desarrollado para el curso de **Diseño de Interfaces**.
-Una sola página con todas las secciones, modo claro/oscuro y diseño responsive.
+Una sola página con todas las secciones, modo claro/oscuro, diseño responsive y dos idiomas
+(español en `/es` e inglés en `/en`).
 
 ## Tecnologías
 
@@ -37,11 +38,14 @@ Para que el formulario envíe correos, copia `.env.example` como `.env.local` y 
 
 ```
 app/
-  layout.tsx      estructura global, fuentes y metadatos
-  page.tsx        une todas las secciones en orden
+  [lang]/
+    layout.tsx    estructura global, fuentes y metadatos (por idioma)
+    page.tsx      une todas las secciones en orden
   globals.css     Tailwind, colores y animaciones
 components/       un componente por sección
-data/             contenido tipado (proyectos, testimonios, experiencia…)
+data/             contenido tipado en español e inglés (proyectos, testimonios, experiencia…)
+dictionaries/     textos de la interfaz: es.ts y en.ts
+proxy.ts          manda "/" al idioma del navegador (o al último elegido)
 types/            tipos de TypeScript
 public/
   cv.pdf          hoja de vida
@@ -49,7 +53,8 @@ public/
   videos/         trailers de los proyectos
 ```
 
-Para cambiar el contenido solo edita los archivos de `data/`.
+Para cambiar el contenido solo edita los archivos de `data/` (cada texto tiene su versión `es` y `en`).
+Los textos fijos de la interfaz (botones, títulos de sección…) están en `dictionaries/`.
 
 ## Despliegue
 

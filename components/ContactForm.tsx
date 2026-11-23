@@ -2,6 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import { site } from "@/data/site";
+import { fill } from "@/lib/i18n";
+import { useI18n } from "./i18n/I18nProvider";
 import { CheckIcon } from "./icons";
 
 type Status = "idle" | "sending" | "success" | "mailto" | "error";
@@ -15,6 +17,8 @@ const inputClass =
   "mt-2 w-full rounded-xl border border-line bg-bg px-4 py-3 text-fg placeholder:text-muted/60 transition-colors outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 user-invalid:border-red-500";
 
 export default function ContactForm() {
+  const { dict } = useI18n();
+  const t = dict.contact;
   const [status, setStatus] = useState<Status>("idle");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -25,7 +29,7 @@ export default function ContactForm() {
     setStatus("sending");
 
     if (!FORMSPREE_ID) {
-      const subject = encodeURIComponent(`Contacto desde el portafolio — ${data.get("name")}`);
+      const subject = encodeURIComponent(`${t.mailtoSubject} — ${data.get("name")}`);
       const body = encodeURIComponent(`${data.get("message")}\n\n${data.get("name")} · ${data.get("email")}`);
       window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
       setStatus("mailto");
@@ -53,18 +57,16 @@ export default function ContactForm() {
         <span className="grid size-14 place-items-center rounded-full bg-accent-2/15 text-2xl text-accent-2">
           <CheckIcon />
         </span>
-        <h3 className="mt-5 text-xl font-semibold">{sent ? "¡Mensaje enviado!" : "Tu mensaje está listo"}</h3>
+        <h3 className="mt-5 text-xl font-semibold">{sent ? t.sentTitle : t.mailtoTitle}</h3>
         <p className="mt-2 text-muted">
-          {sent
-            ? "Gracias por escribirme. Te responderé lo antes posible."
-            : `Se abrió tu aplicación de correo con el mensaje escrito. Dale a «Enviar» allí para que me llegue a ${site.email}.`}
+          {sent ? t.sentText : fill(t.mailtoText, { email: site.email })}
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="mt-6 text-sm font-medium text-accent underline-offset-4 hover:underline"
         >
-          Enviar otro mensaje
+          {t.another}
         </button>
       </div>
     );
@@ -74,7 +76,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-line bg-surface p-6 sm:p-8">
       <div>
         <label htmlFor="name" className="text-sm font-medium">
-          Nombre
+          {t.name}
         </label>
         <input
           id="name"
@@ -83,14 +85,14 @@ export default function ContactForm() {
           required
           minLength={2}
           autoComplete="name"
-          placeholder="Tu nombre"
+          placeholder={t.namePlaceholder}
           className={inputClass}
         />
       </div>
 
       <div>
         <label htmlFor="email" className="text-sm font-medium">
-          Correo electrónico
+          {t.email}
         </label>
         <input
           id="email"
@@ -98,14 +100,14 @@ export default function ContactForm() {
           type="email"
           required
           autoComplete="email"
-          placeholder="tu@correo.com"
+          placeholder={t.emailPlaceholder}
           className={inputClass}
         />
       </div>
 
       <div>
         <label htmlFor="message" className="text-sm font-medium">
-          Mensaje
+          {t.message}
         </label>
         <textarea
           id="message"
@@ -113,14 +115,14 @@ export default function ContactForm() {
           required
           minLength={10}
           rows={5}
-          placeholder="Cuéntame en qué puedo ayudarte"
+          placeholder={t.messagePlaceholder}
           className={`${inputClass} resize-y`}
         />
       </div>
 
       {status === "error" && (
         <p role="alert" className="text-sm text-red-500">
-          No se pudo enviar el mensaje. Inténtalo de nuevo o escríbeme directamente a {site.email}.
+          {fill(t.error, { email: site.email })}
         </p>
       )}
 
@@ -129,7 +131,7 @@ export default function ContactForm() {
         disabled={status === "sending"}
         className="w-full rounded-full bg-accent px-6 py-3 font-medium text-accent-fg transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
       >
-        {status === "sending" ? "Enviando…" : "Enviar mensaje"}
+        {status === "sending" ? t.sending : t.send}
       </button>
     </form>
   );

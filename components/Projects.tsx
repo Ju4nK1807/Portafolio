@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { projects } from "@/data/projects";
 import type { Project } from "@/types";
+import { useI18n } from "./i18n/I18nProvider";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import Reveal from "./ui/Reveal";
 import SectionTitle from "./ui/SectionTitle";
 
-export default function Projects() {
+export default function Projects({ projects }: { projects: Project[] }) {
+  const { dict } = useI18n();
   const [selected, setSelected] = useState<Project | null>(null);
 
   return (
@@ -16,9 +17,9 @@ export default function Projects() {
       <div className="container-page">
         <SectionTitle
           index="02"
-          eyebrow="Proyectos"
-          title="Cosas que he construido."
-          description="Proyectos académicos y personales: web, móvil, escritorio y wearables. Haz clic en uno para ver su trailer y los detalles."
+          eyebrow={dict.projects.eyebrow}
+          title={dict.projects.title}
+          description={dict.projects.description}
         />
 
         <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
