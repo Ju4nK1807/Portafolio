@@ -13,8 +13,9 @@ type Status = "idle" | "sending" | "success" | "mailto" | "error";
 // Si quedara vacío, el formulario abre el cliente de correo con el mensaje listo.
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xzerjbkz";
 
+// Campos de línea: solo un borde inferior que se ilumina al escribir.
 const inputClass =
-  "mt-2 w-full rounded-xl border border-line bg-bg px-4 py-3 text-fg placeholder:text-muted/60 transition-colors outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 user-invalid:border-red-500";
+  "mt-1 w-full border-0 border-b border-line bg-transparent px-0 py-3 text-lg text-fg placeholder:text-muted/50 transition-colors outline-none focus:border-accent user-invalid:border-red-500";
 
 export default function ContactForm() {
   const { dict } = useI18n();
@@ -53,7 +54,7 @@ export default function ContactForm() {
   if (status === "success" || status === "mailto") {
     const sent = status === "success";
     return (
-      <div role="status" className="flex h-full flex-col items-center justify-center rounded-2xl border border-line bg-surface p-10 text-center">
+      <div role="status" className="spot flex h-full flex-col items-center justify-center rounded-3xl border border-line bg-surface p-10 text-center">
         <span className="grid size-14 place-items-center rounded-full bg-accent-2/15 text-2xl text-accent-2">
           <CheckIcon />
         </span>
@@ -73,9 +74,9 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-line bg-surface p-6 sm:p-8">
+    <form onSubmit={handleSubmit} className="spot space-y-7 rounded-3xl border border-line bg-surface p-6 sm:p-10">
       <div>
-        <label htmlFor="name" className="text-sm font-medium">
+        <label htmlFor="name" className="font-mono text-xs text-muted uppercase">
           {t.name}
         </label>
         <input
@@ -91,7 +92,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="text-sm font-medium">
+        <label htmlFor="email" className="font-mono text-xs text-muted uppercase">
           {t.email}
         </label>
         <input
@@ -106,7 +107,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="text-sm font-medium">
+        <label htmlFor="message" className="font-mono text-xs text-muted uppercase">
           {t.message}
         </label>
         <textarea
@@ -129,9 +130,12 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full rounded-full bg-accent px-6 py-3 font-medium text-accent-fg transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
+        className="group flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-4 font-semibold text-accent-fg shadow-[0_0_40px_-10px] shadow-glow transition-transform hover:scale-[1.02] disabled:cursor-wait disabled:opacity-60"
       >
         {status === "sending" ? t.sending : t.send}
+        <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+          →
+        </span>
       </button>
     </form>
   );

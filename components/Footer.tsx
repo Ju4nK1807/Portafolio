@@ -1,17 +1,19 @@
 import { sectionIds } from "@/data/navigation";
 import { getProfile, getSocials, site } from "@/data/site";
 import { getDictionary } from "@/dictionaries";
-import type { Locale } from "@/lib/i18n";
+import { formatMonth } from "@/lib/format";
+import { fill, type Locale } from "@/lib/i18n";
 import { ArrowUpIcon, SocialIconFor } from "./icons";
 
-/** Año para el ©. Se calcula al compilar y queda en caché. */
-async function getYear() {
+/** Mes de la última compilación ("2026-11"). Se calcula al compilar y queda en caché. */
+async function getBuildMonth() {
   "use cache";
-  return new Date().getFullYear();
+  return new Date().toISOString().slice(0, 7);
 }
 
 export default async function Footer({ lang }: { lang: Locale }) {
-  const year = await getYear();
+  const built = await getBuildMonth();
+  const year = built.slice(0, 4);
   const dict = getDictionary(lang);
   const t = dict.footer;
 
@@ -19,11 +21,7 @@ export default async function Footer({ lang }: { lang: Locale }) {
     <footer className="border-t border-line">
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.5fr_1fr_auto]">
         <div>
-          <p className="font-mono text-base font-semibold">
-            <span className="text-accent">&lt;</span>
-            {site.name}
-            <span className="text-accent"> /&gt;</span>
-          </p>
+          <p className="font-serif text-3xl italic">{site.name}</p>
           <p className="mt-3 max-w-sm text-muted">{getProfile(lang).role}. {t.thanks}</p>
           <ul className="mt-6 flex gap-3" aria-label={dict.hero.socials}>
             {getSocials(lang).map((social) => (
@@ -63,12 +61,22 @@ export default async function Footer({ lang }: { lang: Locale }) {
         </a>
       </div>
 
+      {/* Nombre gigante que se corta en el borde inferior */}
+      <div className="overflow-hidden" aria-hidden="true">
+        <p className="container-page translate-y-[18%] bg-gradient-to-b from-fg/90 to-fg/0 bg-clip-text text-[15.5vw] leading-[0.8] font-semibold tracking-[-0.06em] whitespace-nowrap text-transparent select-none xl:text-[11.5rem]">
+          {site.firstName.split(" ")[0]}{" "}
+          <span className="font-serif font-normal tracking-[-0.02em] italic">{site.firstName.split(" ")[1]}</span>
+        </p>
+      </div>
+
       <div className="border-t border-line">
         <div className="container-page flex flex-col gap-2 py-6 text-sm text-muted sm:flex-row sm:justify-between">
           <p>
             © {year} {site.name}. {t.rights}
           </p>
-          <p>{t.madeWith}</p>
+          <p>
+            {t.madeWith} · {fill(t.updated, { date: formatMonth(built, dict.experience.months).toLowerCase() })}
+          </p>
         </div>
       </div>
     </footer>

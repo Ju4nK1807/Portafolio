@@ -4,29 +4,31 @@
 
 /* ---------- Paleta de colores ---------- */
 :root {
-  --bg: #f2f5f1;
+  --bg: #f4f3ee;
   --surface: #ffffff;
-  --surface-2: #e6ece5;
-  --fg: #0c120f;
-  --muted: #4f5d56;
-  --line: #d3dbd2;
+  --surface-2: #e9e8e1;
+  --fg: #111113;
+  --muted: #5f5f68;
+  --line: #d9d8d0;
   --accent: #0b8a45;
   --accent-fg: #ffffff;
   --accent-2: #0e7c86;
+  --glow: #2bd673;
   color-scheme: light;
 }
 
-/* Modo oscuro: verde fósforo sobre negro, estilo terminal */
+/* Modo oscuro: negro tinta con verde fósforo y turquesa */
 .dark {
-  --bg: #060908;
-  --surface: #0c1110;
-  --surface-2: #111816;
-  --fg: #e2efe7;
-  --muted: #7d8f86;
-  --line: #1a2420;
+  --bg: #09090b;
+  --surface: #111114;
+  --surface-2: #18181d;
+  --fg: #f3f3ee;
+  --muted: #8b8b95;
+  --line: #24242b;
   --accent: #3dff8b;
   --accent-fg: #03140a;
   --accent-2: #2ee6d6;
+  --glow: #3dff8b;
   color-scheme: dark;
 }
 
@@ -40,8 +42,10 @@
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-fg);
   --color-accent-2: var(--accent-2);
+  --color-glow: var(--glow);
   --font-sans: var(--font-sans-family), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-family), ui-monospace, monospace;
+  --font-serif: var(--font-serif-family), ui-serif, Georgia, serif;
 }
 
 /* ---------- Base ---------- */
@@ -58,7 +62,7 @@ body {
 }
 
 section[id] {
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: 5rem;
 }
 
 ::selection {
@@ -71,13 +75,13 @@ section[id] {
   .container-page {
     margin-inline: auto;
     width: 100%;
-    max-width: 72rem;
+    max-width: 76rem;
     padding-inline: 1.25rem;
   }
 
   @media (min-width: 48rem) {
     .container-page {
-      padding-inline: 2rem;
+      padding-inline: 2.5rem;
     }
   }
 
@@ -87,45 +91,117 @@ section[id] {
 
   @media (min-width: 48rem) {
     .section {
-      padding-block: 8rem;
+      padding-block: 9rem;
     }
   }
+}
+
+/* ---------- Textura de grano sobre toda la página ---------- */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+.dark .grain {
+  opacity: 0.07;
+}
+
+/* ---------- Brillo que sigue al mouse en las tarjetas (.spot) ---------- */
+.spot {
+  position: relative;
+  isolation: isolate;
+}
+
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--x, -999px) var(--y, -999px),
+    color-mix(in srgb, var(--glow) 12%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.spot:hover::before {
+  opacity: 1;
+}
+
+/* Borde que se ilumina cerca del mouse */
+.spot::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    260px circle at var(--x, -999px) var(--y, -999px),
+    color-mix(in srgb, var(--glow) 70%, transparent),
+    transparent 60%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.spot:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Texto contorneado ---------- */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 35%, transparent);
+}
+
+/* ---------- Puntos de fondo ---------- */
+.bg-dots {
+  background-image: radial-gradient(color-mix(in srgb, var(--fg) 14%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
 /* ---------- Animación de aparición ---------- */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(28px);
+  filter: blur(6px);
   transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+    opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.8s ease;
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: none;
+  filter: none;
 }
 
-/* ---------- Fondo cuadriculado del hero ---------- */
-.bg-grid {
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at 30% 40%, black 20%, transparent 70%);
+/* Letras que suben desde una máscara (títulos) */
+.rise > span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 /* ---------- Animaciones ---------- */
 @theme {
-  --animate-float: float 5s ease-in-out infinite;
-  --animate-marquee: marquee 32s linear infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-reverse: marquee 38s linear infinite reverse;
   --animate-modal-in: modal-in 0.25s ease-out;
-
-  @keyframes float {
-    50% {
-      transform: translateY(-8px);
-    }
-  }
+  --animate-blink: blink 1s steps(1) infinite;
+  --animate-spin-slow: spin 14s linear infinite;
 
   @keyframes modal-in {
     from {
@@ -139,6 +215,18 @@ section[id] {
       transform: translateX(-50%);
     }
   }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes rise {
+    to {
+      transform: none;
+    }
+  }
 }
 
 /* ---------- Accesibilidad: menos movimiento ---------- */
@@ -150,7 +238,13 @@ section[id] {
   .reveal {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
+  }
+
+  .rise > span {
+    transform: none;
+    animation: none;
   }
 
   *,
@@ -161,23 +255,11 @@ section[id] {
   }
 }
 
-/* ---------- Efectos de terminal ---------- */
-.scanlines {
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 2px,
-    color-mix(in srgb, var(--bg) 35%, transparent) 3px,
-    transparent 4px
-  );
-}
-
-@theme {
-  --animate-blink: blink 1s steps(1) infinite;
-
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
-  }
+/* ---------- Desenfoque en el borde inferior de la pantalla ---------- */
+.edge-fade {
+  background: linear-gradient(to top, color-mix(in srgb, var(--bg) 75%, transparent), transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  -webkit-mask-image: linear-gradient(to top, black 30%, transparent);
+  mask-image: linear-gradient(to top, black 30%, transparent);
 }

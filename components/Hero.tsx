@@ -2,100 +2,116 @@ import { getProfile, getSocials, site } from "@/data/site";
 import { getDictionary } from "@/dictionaries";
 import type { Locale } from "@/lib/i18n";
 import BootScreen from "./hero/BootScreen";
-import DitherBackground from "./hero/DitherBackground";
-import Hud from "./hero/Hud";
-import ScrambleText from "./hero/ScrambleText";
-import Typewriter from "./hero/Typewriter";
+import ParticleField from "./hero/ParticleField";
+import RoleRoller from "./hero/RoleRoller";
 import { ArrowRightIcon, DownloadIcon, SocialIconFor } from "./icons";
+import StatusClock from "./StatusClock";
+import Magnetic from "./ui/Magnetic";
+import SplitText from "./ui/SplitText";
 
 export default function Hero({ lang }: { lang: Locale }) {
   const dict = getDictionary(lang);
   const profile = getProfile(lang);
+  const lastName = `${site.name.replace(site.firstName, "").trim()}.`;
 
   return (
     <section id="inicio" className="relative flex min-h-svh flex-col overflow-hidden">
       <BootScreen />
 
-      {/* Fondo: escena WebGL con dithering + líneas de escaneo */}
-      <div className="absolute inset-0 opacity-60 md:opacity-100" aria-hidden="true">
-        <DitherBackground />
-      </div>
-      <div className="scanlines pointer-events-none absolute inset-0" aria-hidden="true" />
+      {/* Fondo: puntos, dos resplandores de color y el campo de partículas */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-bg via-bg/70 to-transparent md:via-bg/40"
+        className="bg-dots pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_70%_45%,black,transparent_70%)]"
         aria-hidden="true"
       />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute top-[10%] right-[5%] size-[38rem] rounded-full bg-accent/10 blur-[120px]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute right-[30%] bottom-[5%] size-[28rem] rounded-full bg-accent-2/15 blur-[120px]"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 opacity-40 lg:opacity-100">
+        <ParticleField text={site.initials} />
+      </div>
 
-      <div className="container-page relative flex flex-1 flex-col justify-between gap-12 pt-24 pb-14">
-        <div className="flex justify-end">
-          <div className="hidden md:block">
-            <Hud />
+      <div className="container-page pointer-events-none relative flex flex-1 flex-col justify-center pt-32 pb-12">
+        <div className="pointer-events-auto max-w-3xl">
+          <div className="flex flex-wrap items-center gap-3 font-mono text-xs">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-accent">
+              {dict.hud.available}
+            </span>
+            <span className="text-muted">
+              {dict.hero.prompt} <span className="text-fg">whoami</span>
+            </span>
           </div>
-        </div>
 
-        <div className="max-w-3xl">
-          <p className="font-mono text-sm text-accent">
-            <span className="text-muted">{dict.hero.prompt}</span> whoami
-          </p>
-
-          <h1 className="mt-4 font-mono text-5xl leading-[1.02] font-bold tracking-tighter sm:text-6xl xl:text-8xl">
-            <ScrambleText text={site.firstName} delay={1700} />
+          <h1 className="mt-8 text-[clamp(3.4rem,8.5vw,8rem)] leading-[0.9] font-semibold tracking-[-0.045em]">
+            <SplitText text={site.firstName} delay={1500} />
             <br />
-            <ScrambleText text="Bastidas." delay={1900} className="text-accent" />
+            <SplitText
+              text={lastName}
+              delay={1850}
+              className="pr-[0.1em] font-serif font-normal tracking-[-0.02em] text-accent italic"
+            />
           </h1>
 
-          <p className="mt-6 font-mono text-lg text-fg sm:text-2xl">
-            <span className="text-accent">&gt;</span> <Typewriter key={lang} words={profile.roles} />
+          <p className="mt-8 flex items-baseline gap-3 font-mono text-lg sm:text-xl">
+            <span className="text-accent">→</span>
+            <RoleRoller key={lang} words={profile.roles} className="text-fg" />
           </p>
 
-          <p className="mt-6 max-w-xl text-lg text-pretty text-muted">{profile.tagline}</p>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted">{profile.tagline}</p>
 
-          <div className="mt-10 flex flex-wrap gap-3 font-mono text-sm">
-            <a
-              href={site.cv}
-              download
-              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 font-semibold text-accent-fg shadow-[0_0_24px] shadow-accent/40 transition-transform hover:-translate-y-0.5"
-            >
-              <DownloadIcon /> {dict.hero.downloadCv}
-            </a>
-            <a
-              href="#proyectos"
-              className="group inline-flex items-center gap-2 rounded-md border border-accent/40 bg-bg/60 px-5 py-3 backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
-            >
-              {dict.hero.viewProjects}
-              <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
-            </a>
-          </div>
+          <div className="mt-10 flex flex-wrap items-center gap-3 text-sm">
+            <Magnetic>
+              <a
+                href={site.cv}
+                download
+                className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-semibold text-accent-fg shadow-[0_0_40px_-8px] shadow-glow transition-transform hover:scale-[1.03]"
+              >
+                <DownloadIcon className="transition-transform group-hover:translate-y-0.5" /> {dict.hero.downloadCv}
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="#proyectos"
+                className="group inline-flex items-center gap-2 rounded-full border border-line bg-bg/50 px-6 py-3.5 font-medium backdrop-blur-sm transition-colors hover:border-fg"
+              >
+                {dict.hero.viewProjects}
+                <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
+              </a>
+            </Magnetic>
 
-          <ul className="mt-10 flex gap-3" aria-label={dict.hero.socials}>
-            {getSocials(lang).map((social) => (
-              <li key={social.label}>
-                <a
-                  href={social.href}
-                  target={social.icon === "mail" ? undefined : "_blank"}
-                  rel="noreferrer"
-                  aria-label={social.label}
-                  className="grid size-11 place-items-center rounded-md border border-line bg-bg/60 text-lg text-muted backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
-                >
-                  <SocialIconFor icon={social.icon} />
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-10 md:hidden">
-            <Hud />
+            <ul className="ml-1 flex gap-1" aria-label={dict.hero.socials}>
+              {getSocials(lang).map((social) => (
+                <li key={social.label}>
+                  <a
+                    href={social.href}
+                    target={social.icon === "mail" ? undefined : "_blank"}
+                    rel="noreferrer"
+                    aria-label={social.label}
+                    className="grid size-11 place-items-center rounded-full text-lg text-muted transition-colors hover:bg-surface-2 hover:text-fg"
+                  >
+                    <SocialIconFor icon={social.icon} />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
 
-      <a
-        href="#sobre-mi"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 font-mono text-xs text-muted transition-colors hover:text-accent md:block"
-      >
-        [ scroll ↓ ]
-      </a>
+      {/* Franja inferior con datos en vivo */}
+      <div className="container-page relative pb-8">
+        <div className="grid grid-cols-2 items-center gap-4 border-t border-line pt-5 font-mono text-[11px] text-muted uppercase sm:grid-cols-3">
+          <StatusClock className="flex" withLocation />
+          <p className="hidden text-center sm:block">{dict.hero.hint}</p>
+          <a href="#sobre-mi" className="justify-self-end transition-colors hover:text-accent">
+            scroll <span className="inline-block animate-bounce">↓</span>
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

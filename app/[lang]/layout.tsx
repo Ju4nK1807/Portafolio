@@ -1,22 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
+import SpotlightTracker from "@/components/ui/SpotlightTracker";
 import { getProfile, site } from "@/data/site";
 import { getDictionary } from "@/dictionaries";
 import { isLocale, locales } from "@/lib/i18n";
 import "../globals.css";
 
-const sans = Space_Grotesk({
+const sans = Geist({
   variable: "--font-sans-family",
   subsets: ["latin"],
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
+const mono = Geist_Mono({
   variable: "--font-mono-family",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const serif = Instrument_Serif({
+  variable: "--font-serif-family",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -54,8 +63,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f4ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0f13" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f3ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
   ],
 };
 
@@ -68,7 +77,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   const dict = getDictionary(lang);
 
   return (
-    <html lang={lang} className={`${sans.variable} ${mono.variable} dark`} suppressHydrationWarning>
+    <html lang={lang} className={`${sans.variable} ${mono.variable} ${serif.variable} dark`} suppressHydrationWarning>
       <body className="font-sans antialiased">
         <Script id="tema" strategy="beforeInteractive">
           {themeScript}
@@ -82,6 +91,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <I18nProvider lang={lang} dict={dict}>
           {children}
         </I18nProvider>
+        <SpotlightTracker />
+        {/* Textura de grano sobre todo el sitio */}
+        <div aria-hidden="true" className="grain pointer-events-none fixed inset-0 z-[80]" />
       </body>
     </html>
   );

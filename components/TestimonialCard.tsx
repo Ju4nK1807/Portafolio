@@ -4,40 +4,53 @@ import type { Testimonial } from "@/types";
 
 type TestimonialCardProps = {
   testimonial: Testimonial;
+  index: number;
 };
 
-export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
+/** Testimonio en forma de fila: quién lo dice a la izquierda, la cita a la derecha. */
+export default function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
   return (
-    <figure className="flex h-full flex-col rounded-2xl border border-line bg-surface p-7">
-      <span className="font-serif text-6xl leading-none text-accent" aria-hidden="true">
-        “
-      </span>
-      <blockquote className="mt-2 flex-1 text-lg leading-relaxed text-pretty">{testimonial.quote}</blockquote>
-
-      <figcaption className="mt-8 flex items-center gap-4 border-t border-line pt-6">
-        {testimonial.avatar ? (
-          <Image
-            src={testimonial.avatar}
-            alt={testimonial.name}
-            width={48}
-            height={48}
-            className="size-12 rounded-full object-cover"
-          />
-        ) : (
-          <span
-            className="grid size-12 shrink-0 place-items-center rounded-full bg-accent/15 font-mono text-sm font-semibold text-accent"
-            aria-hidden="true"
-          >
-            {initialsOf(testimonial.name)}
-          </span>
-        )}
-        <div>
-          <p className="font-semibold">{testimonial.name}</p>
-          <p className="text-sm text-muted">
-            {testimonial.role} · <span className="text-accent">{testimonial.relation}</span>
-          </p>
+    <figure className="group grid gap-6 py-12 md:grid-cols-[15rem_minmax(0,1fr)] md:gap-16">
+      <figcaption className="flex items-start gap-4 md:flex-col md:gap-5">
+        <span className="font-mono text-xs text-muted transition-colors group-hover:text-accent">
+          {String(index + 1).padStart(2, "0")} /
+        </span>
+        <div className="flex items-center gap-3">
+          {testimonial.avatar ? (
+            <Image
+              src={testimonial.avatar}
+              alt={testimonial.name}
+              width={44}
+              height={44}
+              className="size-12 rounded-full object-cover"
+            />
+          ) : (
+            <span
+              className="grid size-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent to-accent-2 font-mono text-sm font-bold text-accent-fg"
+              aria-hidden="true"
+            >
+              {initialsOf(testimonial.name)}
+            </span>
+          )}
+          <div className="min-w-0">
+            <p className="font-semibold">{testimonial.name}</p>
+            <p className="text-sm text-accent">{testimonial.relation}</p>
+            <p className="font-mono text-xs text-muted">{testimonial.role}</p>
+          </div>
         </div>
       </figcaption>
+
+      <blockquote className="relative">
+        <span
+          className="absolute -top-5 left-0 font-serif text-8xl leading-none text-accent italic select-none md:-left-10"
+          aria-hidden="true"
+        >
+          “
+        </span>
+        <p className="pl-10 font-serif text-2xl leading-snug text-pretty md:pl-0 md:text-[2.1rem] md:leading-[1.25]">
+          {testimonial.quote}
+        </p>
+      </blockquote>
     </figure>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import type { MouseEvent } from "react";
-import { LOCALE_COOKIE, type Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
+import { languageHref } from "@/lib/theme";
 import { useI18n } from "./I18nProvider";
 
 type LanguageSwitchProps = {
@@ -16,10 +17,8 @@ export default function LanguageSwitch({ className = "", tabIndex }: LanguageSwi
 
   // Enlace normal (carga completa): /es y /en son páginas distintas, cada una con su <html lang>.
   function change(event: MouseEvent<HTMLAnchorElement>) {
-    // Se recuerda la elección para la próxima visita a la raíz "/".
-    document.cookie = `${LOCALE_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax`;
-    // Se conserva la sección en la que estás (#proyectos, #contacto…).
-    event.currentTarget.href = `/${next}${window.location.hash}`;
+    // Se recuerda la elección y se conserva la sección en la que estás (#proyectos…).
+    event.currentTarget.href = languageHref(next);
   }
 
   return (
@@ -29,8 +28,8 @@ export default function LanguageSwitch({ className = "", tabIndex }: LanguageSwi
       onClick={change}
       tabIndex={tabIndex}
       aria-label={dict.language.switchTo}
-      title={dict.language.switchTo}
-      className={`flex h-10 items-center rounded-full border border-line px-1 font-mono text-xs transition-colors hover:border-accent ${className}`}
+      title={`${dict.language.switchTo} (L)`}
+      className={`flex h-9 items-center rounded-full px-1 font-mono text-xs transition-colors hover:bg-surface-2 ${className}`}
     >
       {(["es", "en"] as const).map((code) => (
         <span

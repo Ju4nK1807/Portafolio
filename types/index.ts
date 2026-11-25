@@ -13,6 +13,9 @@ export type QuickFact = {
   value: string;
 };
 
+/** Tipo de proyecto, usado por los filtros de la sección. */
+export type ProjectCategory = "web" | "movil" | "escritorio" | "wearable" | "backend";
+
 export type ProjectStatus = "Terminado" | "En desarrollo";
 
 export type Project = {
@@ -26,6 +29,7 @@ export type Project = {
   /** Ruta al trailer en /public/videos. */
   trailer?: string;
   tags: string[];
+  category: ProjectCategory;
   year: string;
   status: ProjectStatus;
   /** Enlace al repositorio en GitHub. */

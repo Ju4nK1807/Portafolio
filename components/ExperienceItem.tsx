@@ -8,23 +8,27 @@ type ExperienceItemProps = {
   lang: Locale;
 };
 
+/** Fila de la tabla de experiencia: fechas | cargo y lugar | descripción. */
 export default function ExperienceItem({ item, lang }: ExperienceItemProps) {
   const t = getDictionary(lang).experience;
   const current = item.end === null;
 
   return (
-    <li className="relative pb-10 pl-8 last:pb-0">
-      <span
-        className={`absolute top-1.5 left-0 size-3 -translate-x-1/2 rounded-full border-2 ${current ? "border-accent bg-accent" : "border-line bg-bg"}`}
-        aria-hidden="true"
-      />
-      <p className="font-mono text-xs text-muted">
+    <li className="group spot grid gap-3 rounded-2xl border-t border-line px-4 py-7 transition-colors hover:border-transparent hover:bg-surface md:grid-cols-[13rem_minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8 md:px-6">
+      <p className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
         <time dateTime={item.start}>{formatRange(item.start, item.end, t.months, t.present)}</time>
-        {current && <span className="ml-2 rounded-full bg-accent/15 px-2 py-0.5 text-accent">{t.current}</span>}
+        {current && (
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-2 py-0.5 text-accent">
+            <span className="size-1.5 animate-pulse rounded-full bg-accent" aria-hidden="true" />
+            {t.current}
+          </span>
+        )}
       </p>
-      <h4 className="mt-2 text-lg font-semibold">{item.title}</h4>
-      <p className="text-sm text-accent">{item.org}</p>
-      <p className="mt-2 text-pretty text-muted">{item.description}</p>
+      <div>
+        <h4 className="text-xl font-semibold tracking-tight transition-colors group-hover:text-accent">{item.title}</h4>
+        <p className="mt-1 font-serif text-lg text-muted italic">{item.org}</p>
+      </div>
+      <p className="text-pretty text-muted">{item.description}</p>
     </li>
   );
 }

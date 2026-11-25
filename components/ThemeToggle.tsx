@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { toggleTheme } from "@/lib/theme";
 import { useI18n } from "./i18n/I18nProvider";
 import { MoonIcon, SunIcon } from "./icons";
 
@@ -18,23 +19,13 @@ export default function ThemeToggle() {
   const { dict } = useI18n();
   const dark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  function toggle() {
-    const next = !dark;
-    document.documentElement.classList.toggle("dark", next);
-    try {
-      localStorage.setItem("theme", next ? "dark" : "light");
-    } catch {
-      // Sin almacenamiento disponible: el cambio dura solo esta visita.
-    }
-  }
-
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={toggleTheme}
       aria-label={dark ? dict.theme.toLight : dict.theme.toDark}
-      title={dark ? dict.theme.light : dict.theme.dark}
-      className="grid size-10 place-items-center rounded-full border border-line text-lg text-muted transition-colors hover:border-accent hover:text-fg"
+      title={`${dark ? dict.theme.light : dict.theme.dark} (T)`}
+      className="grid size-9 place-items-center rounded-full text-lg text-muted transition-colors hover:bg-surface-2 hover:text-fg"
     >
       {dark ? <SunIcon /> : <MoonIcon />}
     </button>

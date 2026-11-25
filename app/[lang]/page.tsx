@@ -9,6 +9,8 @@ import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import Ruler from "@/components/Ruler";
+import WelcomeBack from "@/components/WelcomeBack";
 import { getProjects } from "@/data/projects";
 import { isLocale } from "@/lib/i18n";
 
@@ -19,6 +21,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <>
       <Navbar />
+      <Ruler />
+      <WelcomeBack />
       <main id="contenido">
         <Hero lang={lang} />
         <About lang={lang} />
@@ -30,6 +34,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </main>
       <Footer lang={lang} />
       <BackToTop />
+      {/* Desenfoque suave en el borde inferior de la pantalla */}
+      <div aria-hidden="true" className="edge-fade pointer-events-none fixed inset-x-0 bottom-0 z-20 h-14" />
     </>
   );
 }

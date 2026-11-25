@@ -7,34 +7,43 @@ type TestimonialSource = Omit<Testimonial, "role" | "relation" | "quote"> & {
   quote: Localized;
 };
 
-// TODO: reemplaza estos testimonios de ejemplo por opiniones reales
-// (profesores, compañeros, clientes). El curso pide mínimo 3.
+const classmate: Localized = {
+  es: "Compañero de trabajo y semestre",
+  en: "Coworker and classmate",
+};
+
+const program: Localized = {
+  es: "Ingeniería de Software · UCC",
+  en: "Software Engineering · UCC",
+};
+
+// Opiniones de compañeros. Antes de publicar, muéstraselas a cada uno para que las apruebe.
 const testimonials: TestimonialSource[] = [
   {
-    name: "Nombre del profesor/a",
-    role: { es: "Docente de Diseño de Interfaces", en: "Interface Design professor" },
-    relation: { es: "Profesor", en: "Professor" },
+    name: "Johan Mosquera",
+    role: program,
+    relation: classmate,
     quote: {
-      es: "Juan Camilo cuida cada detalle de la interfaz y entrega proyectos que funcionan de verdad. Siempre va un paso más allá de lo que pide el enunciado.",
-      en: "Juan Camilo takes care of every detail of the interface and delivers projects that really work. He always goes a step beyond what the assignment asks for.",
+      es: "Con Juan Camilo hemos sacado varios trabajos juntos, y algo que le valoro es que no se queda con la duda: si algo no funciona, se pone a investigar hasta entender por qué. Cuando nos tocó montar la parte de Docker yo andaba perdido y me lo explicó con calma, sin hacerme sentir bobo por preguntar.",
+      en: "Juan Camilo and I have done several assignments together, and what I value most is that doubts never get left hanging: if something breaks, Juan Camilo digs in until it makes sense. When we had to set up Docker I was completely lost, and got walked through it calmly. I never felt dumb for asking.",
     },
   },
   {
-    name: "Nombre del compañero/a",
-    role: { es: "Estudiante de Ingeniería de Software", en: "Software Engineering student" },
-    relation: { es: "Compañero de equipo", en: "Teammate" },
+    name: "Juan Camilo Rosero",
+    role: program,
+    relation: classmate,
     quote: {
-      es: "Trabajar con él es fácil: organiza las tareas, explica lo que hace y no deja nada a medias. En el proyecto integrador fue clave para que todo se conectara.",
-      en: "Working with him is easy: he organizes the tasks, explains what he does and never leaves anything half done. In the capstone project he was key to making everything fit together.",
+      es: "Siempre llega a la reunión con algo ya hecho. Uno apenas está leyendo el enunciado y ya tiene el repositorio creado y las tareas repartidas en GitHub. Es bastante exigente con el orden del código; al principio me parecía exagerado, pero después agradecí no tener que adivinar qué hacía cada archivo.",
+      en: "Juan Camilo always shows up to meetings with something already done. You're barely reading the assignment and the repo already exists, with the tasks split up on GitHub. Also pretty picky about how the code is organized. At first I thought it was too much, but later I was glad I didn't have to guess what each file did.",
     },
   },
   {
-    name: "Nombre de la persona",
-    role: { es: "Cliente / Jefe", en: "Client / Manager" },
-    relation: { es: "Cliente", en: "Client" },
+    name: "Santiago Ortega",
+    role: program,
+    relation: classmate,
     quote: {
-      es: "Entendió rápido lo que necesitábamos y lo convirtió en una solución clara. Comunicación constante y entregas a tiempo.",
-      en: "He quickly understood what we needed and turned it into a clear solution. Constant communication and on-time deliveries.",
+      es: "Nos conocemos desde los primeros semestres. Tiene muy buen ojo para lo visual y se fija en cosas que a uno se le pasan, como un botón que se ve raro en el celular. Y cuando dice que algo queda para el jueves, queda para el jueves. Nos ha tocado trasnochar antes de varias entregas y nunca ha dejado tirado al equipo.",
+      en: "We've known each other since our first semesters. Juan Camilo has a great eye for visuals and catches things the rest of us miss, like a button that looks off on mobile. And when something is promised for Thursday, it's ready on Thursday. We've pulled a few all-nighters before deadlines and the team has never been left hanging.",
     },
   },
 ];
